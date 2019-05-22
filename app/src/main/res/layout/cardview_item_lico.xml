@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    android:id="@+id/cardview_id"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimaryDark"
+    android:layout_width="match_parent"
+    android:layout_height="190dp"
+    android:layout_margin="8dp"
+
+    android:onClick="animateIntent"
+    android:transitionName="@string/animation_string"
+    android:clickable="true"
+    android:elevation="10dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    cardview:cardCornerRadius="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:id="@+id/fotoLicoreria"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:background="#2d2d2d"
+            android:scaleType="centerCrop"
+            android:transitionName="@string/animation_string"/>
+
+        <TextView
+            android:id="@+id/nomLicoreria"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/tarjetas"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/texto"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

@@ -1,0 +1,137 @@
+<resources>
+    <string name="app_name">Oh!Bebemos</string>
+    <string name="registroLicoreria">Registrar/Iniciar</string>
+    <string name="registroLicoreriaExp">Registrese o inicie sesión</string>
+    <string name="buscarLicorerias">Buscar Licorerias</string>
+    <string name="buscarLicoreriasExp">Busque por zona o vea por lista</string>
+    <string name="numeroCodigo">Código de registro</string>
+    <string name="enviarCodigo">Enviar código</string>
+    <string name="advertenciaSMS">Ingrese el código de registro que se le entrego al adquirir el producto</string>
+    <string name="mensajeCodigoVacio">Debe ingresar un código de activación brindado por el personal</string>
+    <string name="registroExitoso">Espere...</string>
+    <string name="registroNoautorizado">Equipo no a utorizado</string>
+    <string name="registroCodigoinvalido">Codigo inválido</string>
+    <string name="licoreriaNombreDueño">Nombre del dueño de la licoreria</string>
+    <string name="licoreriaApellidoDueño">Apellido del dueño de la licoreria</string>
+    <string name="licoreriaNombre">Nombre de la licoreria</string>
+    <string name="licoreriaDescripcion">Descripción de la licoreria</string>
+    <string name="licoreriaUbicacion">Ubicación de la licoreria</string>
+    <string name="licoreriaUbicacionGPS">Ubicacion por GPS de la licoreria</string>
+    <string name="btn_registrarLicoreria">Registrar</string>
+    <string name="btn_reiniciarLicoreria">Reiniciar</string>
+    <string name="btn_cancelarLicoreria">Cancelar</string>
+    <string name="licoreriaFoto">Fotografia de la licoreria</string>
+    <string name="licoreriaTomarFoto">Capturar</string>
+    <string name="licoreriaCargarFoto">Cargar</string>
+    <string name="advertenciaLicoreriaVacio">Verifique que todos los campos esten llenos</string>
+    <string name="registrarUbicacionGPS">GPS</string>
+    <string name="habilitarPermisos">Habilite los permisos</string>
+    <string name="dialogoPermisosTitulo">Permisos desactivados</string>
+    <string name="dialogoPermisosMensajes">Debe aceptar los permisos para el correcto funcionamiento de la aplicación</string>
+    <string name="dialogoPermisosGracias">Gracias!</string>
+    <string name="codigoDesactivo">El código caducó, renueve su suscripción</string>
+    <string name="registroLicoreriaExitoso">Registro exitoso!</string>
+    <string name="registroLicoreriaFallido">Error de registro, vuelva a intentar</string>
+    <string name="erroConexionVolley">No se ha podido conectar con el servidor, intente nuevamente</string>
+    <string name="verificacionDatos">Verificando datos . . .</string>
+    <string name="imeiDistinto">Equipo no autorizado</string>
+    <string name="estadoInactivo">Renueve su suscripción</string>
+    <string name="codigoInactivo">El código caducó, renueve su suscripción</string>
+    <string name="errorDesconocido">Error, contáctese con el equipo de DrinkApp</string>
+    <string name="errorDesconexion">Error de conexión, intente nuevamente</string>
+    <string name="gpsEstadoInactivo">El GPS esta inactivo</string>
+    <string name="nombreLic"><u>Licoreria: </u></string>
+    <string name="descLic"><u>Descripción: </u></string>
+    <string name="ubiLic"><u>Ubicacion: </u></string>
+    <string name="ubiLicGPS"><u>Ubicacion GPS: </u></string>
+    <string name="promoLic"><u>Promoción: </u></string>
+    <string name="guardarProm">Guardar/Actualizar promoción</string>
+    <string name="dudasConsultas">Revisar consultas</string>
+    <string name="tamanioPromo">El contenido de la(s) promoción debe ser menor a doscientos (200) caracteres</string>
+    <string name="tamanioPromoAcc">Operación concluida</string>
+    <string name="actualizarFotoLico">Actualizar foto</string>
+    <string name="irALico">Ver en mapa</string>
+    <string name="token">pk.eyJ1Ijoibm9sdXMiLCJhIjoiY2p0cnAwa3p3MHNjaTRkcXM3Nms3bG9hbSJ9.QvlF7BWVem6PgrIHrja_wA</string>
+    <string name="animation_string">hello</string>
+    <string name="noExistenLicores">Ninguna licoreria abierta</string>
+    <string name="tituloLicoresDisponibles"><i>Lista de licorerias abiertas en este momento</i></string>
+    <string name="textSwitch"><b>Abierto?</b></string>
+    <string name="zonaBusqueda">Ingrese la zona de búsqueda</string>
+    <string name="todosLicores">Lista de licorerias</string>
+    <string name="buscarPorZona">Buscar</string>
+    <string name="noexisteZona">Ninguna licoreria</string>
+    <string name="ingresePalabra">Ingrese la zona a buscar</string>
+    <string name="txtv_soloPalabra">Ingrese sólo el nombre de la zona</string>
+    <string name="telefonoLico">Contacto:</string>
+
+    <string name="actualizar">Actualizar</string>
+    <string name="actualizacionNombre">Actualización de nombre correcto</string>
+    <string name="actualizacionDescripcion">Actualización de descripción correcta</string>
+    <string name="actualizacionUbicacion">Actualización de ubicación correcta</string>
+    <string name="actualizacionUbicacionGPS">Actualización de ubicación GPS correcta</string>
+    <string name="actualizacionPromocion">Promoción actualizada</string>
+    <string name="actualizacionTelefono">Contacto actualizado</string>
+
+    <string name="actualizacionFoto">Foto actualizada</string>
+    <string name="actualizacionError">Error en actualización de campos, intente nuevamente</string>
+
+    <string name="av_actnom">Ingrese el nuevo nombre</string>
+    <string name="av_actdes">Ingrese la nueva descripción</string>
+    <string name="av_actubi">Ingrese la nueva ubicación</string>
+    <string name="av_actubigps">Obtener nueva ubicación GPS</string>
+    <string name="av_actprom">Ingrese la nueva promoción</string>
+    <string name="av_acttel">Ingrese el nuevo número de contacto</string>
+    <string name="av_actfoto">Seleccione una opción</string>
+    <string name="obtenerPosiciones">Ubicacion obtenida, ¿desea guardar?</string>
+    <string name="actualizarFotoAviso">Debe actualizar la fotografia para registrar el cambio</string>
+    <string name="splashInicio"><b><i>Iniciando</i></b></string>
+
+
+    <string name="URL">https://www.nolusaurio.club</string>
+    <string name="digitos">abcdefghijklmnopqrstuvwxy,z ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="digitos2">abcdefghijklmnñopqrstuvwxy,z ABCDEFGHIJKLMNÑOPQRSTUVWXYZ.0123456789 #</string>
+
+    <string name="menuitemuno">Fotografìa</string>
+    <string name="menuitemdos">Conexión</string>
+    <string name="menuitemtres">Soporte</string>
+    <string name="menuitemcuatro">GPS</string>
+
+    <string name="aceptar">Aceptar</string>
+
+
+    <string name="problemas_camara">Se recomienda capturar la fotografia de forma vertical para una mejor visualización de ubicación.</string>
+    <string name="problemas_internet">Revise si posee señal de internet a través de datos o verifique su conexión Wifi para evitar inconvenientes de conexión.</string>
+    <string name="problemas_soporte">¿Dudas?¿Sugerencias?¿Comentarios? sientase libre de contactarnos al correo soporte@im.org, por nuestra red social en Facebook o al sitio web www.im.org</string>
+    <string name="problemas_gps">Si tiene problemas para establecer la ubicación del GPS, verifique si es posible obtener su posición ingresando a Google Maps, en caso de ser exitosa la ubicación mediante tal aplicación, intentar nuevamente obtener la ubicación por el botón GPS de la aplicación Oh!Bebemos. </string>
+
+    <string name="orientacionFoto">Orientación de cámara</string>
+    <string name="conexionRed">Conexión de red</string>
+    <string name="contactoSoporte">Contáctenos</string>
+    <string name="gpsproblemas">Inconveniente GPS</string>
+
+    <string name="consultarDuenio">Consultar a licorería</string>
+    <string name="consultarIm">Contáctate con nosotros</string>
+
+    <string name="tituloConsultarDuenio">Escribe al dueño(a)</string>
+    <string name="hint">Dudas</string>
+    <string name="enviandoConsultaDuenio">Consulta enviada</string>
+
+    <string name="comentariosLico"><u>Consultas y respuestas de la licorería</u></string>
+
+
+
+
+
+    <string name="nombreCon"><u>Nombre: </u></string>
+    <string name="conCon"><u>Duda: </u></string>
+    <string name="conRes"><u>Respuesta:</u></string>
+
+    <string name="responderBoton">Responder</string>
+    <string name="consultaNombre"><u>Nombre:</u></string>
+    <string name="consultaConsulta"><u>Consulta:</u></string>
+    <string name="responderConsulta"><u>Respuesta:</u></string>
+    <string name="layoutRespuesta">Escribe la respuesta:</string>
+    <string name="layoutRespuestaHint">Respuesta</string>
+    <string name="mensajeSinComentarios">No tiene consultas pendientes</string>
+
+</resources>

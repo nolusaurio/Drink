@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   <!-- <color name="colorPrimary">#38445e</color>
+    <color name="colorPrimaryDark">#1e293d</color>
+    <color name="colorAccent">#2dd2d2</color>-->
+
+
+    <color name="colorPrimary">#03a9f4</color>
+    <color name="colorPrimaryDark">#0288d1</color>
+    <color name="colorAccent">#ffd740</color>
+    <color name="textoSegundo">#f3ef0e9d</color>
+
+    <!--     <color name="textoSegundo">#f3ef0e9d</color> -->
+
+    <color name="splash">#c6c3c3</color>
+
+    <color name="fondoLicos">#424242</color>
+
+    <color name="tarjetas">#0288d1</color>
+    <color name="texto">#ffffff</color>
+</resources>

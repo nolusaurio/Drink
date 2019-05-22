@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+    <item
+        android:title="@string/menuitemdos"
+        android:id="@+id/itemdos"
+        app:showAsAction="never"/>
+
+    <item
+        android:title="@string/menuitemtres"
+        android:id="@+id/itemtres"
+        app:showAsAction="never"/>
+
+
+    <!-- iconos -->
+
+
+    <item
+        android:title="@string/menuitemdos"
+        android:id="@+id/itemdoss"
+        android:icon="@drawable/internettrouble"
+        app:showAsAction="always"/>
+
+    <item
+        android:title="@string/menuitemtres"
+        android:icon="@drawable/technicalsupport"
+        app:showAsAction="always"
+        android:id="@+id/itemtress"/>
+
+</menu>

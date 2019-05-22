@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="www.nolusaurio.club.drinkapp">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/icono"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".registroLicoreria"
+            android:configChanges="keyboard|orientation|screenSize" />
+        <activity android:name=".pantallaPrincipalLicoreria" />
+        <activity
+            android:name=".BuscarLicos"
+            android:configChanges="orientation|screenSize|keyboardHidden" />
+        <activity android:name=".VIstaLic" />
+        <activity
+            android:name=".MapaLicoreria"
+            android:configChanges="orientation|screenSize" />
+        <activity android:name=".Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".tipoBusqueda"
+            android:configChanges="orientation|screenSize" />
+
+        <!-- añadido -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="www.nolusaurio.club.drinkapp.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <!-- ressource file to create -->
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/image_paths"></meta-data>
+        </provider>
+
+        <activity android:name=".consultasLicoreria"></activity>
+    </application>
+
+</manifest>

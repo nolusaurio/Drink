@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title="@string/menuitemuno"
+        android:id="@+id/itemuno"
+        app:showAsAction="never">
+
+    </item>
+
+
+    <item
+        android:title="@string/menuitemdos"
+        android:id="@+id/itemdos"
+        app:showAsAction="never"/>
+
+    <item
+        android:title="@string/menuitemtres"
+        android:id="@+id/itemtres"
+        app:showAsAction="never"/>
+
+    <item
+        android:title="@string/menuitemcuatro"
+        android:id="@+id/itemcuatro"
+        app:showAsAction="never"/>
+
+
+    <!-- iconos -->
+    <item
+        android:title="@string/menuitemuno"
+        android:id="@+id/itemunoo"
+        android:icon="@drawable/camera"
+        app:showAsAction="always"/>
+
+    <item
+        android:title="@string/menuitemdos"
+        android:id="@+id/itemdoss"
+        android:icon="@drawable/internettrouble"
+        app:showAsAction="always"/>
+
+    <item
+        android:title="@string/menuitemtres"
+        android:icon="@drawable/technicalsupport"
+        app:showAsAction="always"
+        android:id="@+id/itemtress"/>
+
+    <item
+        android:title="@string/menuitemcuatro"
+        android:icon="@drawable/gpslugar"
+        app:showAsAction="always"
+        android:id="@+id/itemcuatroo"/>
+
+</menu>
