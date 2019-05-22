@@ -435,6 +435,7 @@ public class VIstaLic extends AppCompatActivity {
 
     private String moderar(String palabra){
         String ret ="";
+
         String moderacion = "puta PUTA puto PUTO put4 PUT4 put0 PUT0 " +
                 "zorra ZORRA z0rr4 Z0RR4 mierda MIERDA m13rd4 M13RD4 " +
                 "pendejo PENDEJO p3nd3jo P3ND3J0 perra PERRA p3rr4 P3RR4 " +
@@ -442,7 +443,10 @@ public class VIstaLic extends AppCompatActivity {
 
         String[]mod = moderacion.split("\\s+");
         for(String pal : mod){
-            if(palabra.equals(pal)){
+
+            if(palabra.contains(pal)){
+                ret = "palabra moderada por admin";
+            } else if(palabra.equals(pal)){
                 ret = "palabra moderada por admin";
                 break;
             } else {

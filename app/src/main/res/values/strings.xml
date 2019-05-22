@@ -91,6 +91,10 @@
     <string name="digitos">abcdefghijklmnopqrstuvwxy,z ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
     <string name="digitos2">abcdefghijklmnñopqrstuvwxy,z ABCDEFGHIJKLMNÑOPQRSTUVWXYZ.0123456789 #</string>
 
+    <string name="digitos3">abcdefghijklmnñopqrstuvwxy,zABCDEFGHIJKLMNÑOPQRSTUVWXYZ</string>
+    <string name="digitos4">abcdefghijklmnñopqrstuvwxy, zABCDEFGHIJKLMNÑOPQRSTUVWXYZ.#¿?</string>
+
+
     <string name="menuitemuno">Fotografìa</string>
     <string name="menuitemdos">Conexión</string>
     <string name="menuitemtres">Soporte</string>
