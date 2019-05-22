@@ -180,7 +180,6 @@ public class VIstaLic extends AppCompatActivity {
             tel.setText(t + "");
 
 
-            //getGPS();
 
             consulta.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -242,8 +241,7 @@ public class VIstaLic extends AppCompatActivity {
         Log.w("VISTALIC ENVIO COMN:", envio);
         loadingScreen.show(getSupportFragmentManager(), "Espere...");
 
-        /* inicio
-        */
+
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, envio, null, response -> {
             try {
@@ -446,6 +444,7 @@ public class VIstaLic extends AppCompatActivity {
 
             if(palabra.contains(pal)){
                 ret = "palabra moderada por admin";
+                break;
             } else if(palabra.equals(pal)){
                 ret = "palabra moderada por admin";
                 break;
@@ -469,7 +468,6 @@ public class VIstaLic extends AppCompatActivity {
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, envio, null, response -> {
             try {
-                //String resulJSON = response.getString("estado");
                 if(response.getString("estado").equals("1")){
                     Log.w("VISTALIC cargarCom", "Qui");
 
@@ -516,7 +514,6 @@ public class VIstaLic extends AppCompatActivity {
         });
         SingletonVolley.getInstanciaVolley(getApplicationContext()).addToRequestQueue(request);
 
-        //////////
 
     }
 
