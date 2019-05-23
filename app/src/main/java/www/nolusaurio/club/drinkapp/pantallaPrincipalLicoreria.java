@@ -62,19 +62,16 @@ import java.io.UnsupportedEncodingException;
 
 public class pantallaPrincipalLicoreria extends AppCompatActivity {
 
-    //para actualizar la foto
     private FusedLocationProviderClient client;
     LocationRequest locationRequest;
 
     private ProgressDialog progressDialog;
 
-    //sharedpreferences para obtener el codigo de registro y recuperar los datos
     sharedPreferences sharedPreferences;
     private String cod = "";
     private String URL = "";
     String nombreLicoreriaComentarios = "";
 
-    //datos comunes de la app
     private TextView nombreLicoreria, descripcionLicoreria, ubii, ubiiGPS, estSw, telephone;
     private EditText promo;
     private ImageView fotografia;
@@ -83,7 +80,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
 
     final DialogFragment loadingScreen = LoadingScreen.getInstance();
 
-    //datos para tomar foto
     private static final String CARPETA_PRINCIPAL = "drinkapp/"; //directorio principal
     private static final String CARPETA_IMAGEN = "imagenes"; //carpeta donde se guardaran las imagenes
     private static final String DIRECTORIO_IMAGEN = CARPETA_PRINCIPAL + CARPETA_IMAGEN; //ruta carpeta de directorio
@@ -93,7 +89,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
     private static final int COD_FOTO = 20;
 
 
-    //bandera para determinar si se ha cargado una foto para posteriormente guardarla
     private int bandera = 0;
 
     @Override
@@ -134,10 +129,9 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        //para guardar el estado del switch
         est.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (!cod.equals("0")) {
-                if (isChecked) { //aca se actualiza la tabla con el webservice
+                if (isChecked) {
                     datosWeb("1", cod);
                     setEstSwitch("1");
                     estSw.setText("Si");
@@ -185,20 +179,12 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
 
         guardarFoto.setOnClickListener(v -> registrarFoto(nombreLicoreria.getText().toString().trim(), cod));
 
-        actTele.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                actualizarTelefono(cod);
-            }
-        });
+        actTele.setOnClickListener(v -> actualizarTelefono(cod));
 
-        consultas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(pantallaPrincipalLicoreria.this, consultasLicoreria.class);
-                i.putExtra("nombreLicoreria", nombreLicoreriaComentarios);
-                startActivity(i);
-            }
+        consultas.setOnClickListener(v -> {
+            Intent i = new Intent(pantallaPrincipalLicoreria.this, consultasLicoreria.class);
+            i.putExtra("nombreLicoreria", nombreLicoreriaComentarios);
+            startActivity(i);
         });
 
 
@@ -215,10 +201,7 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
         String URL = getString(R.string.URL);
         String URL_GET = URL + "/drinkapp/actualizarTeleph.php?teleph=";
         final String BACKURL = URL_GET;
-        //URL_GET = URL_GET + cod;
 
-
-        //
         LayoutInflater layoutInflater = LayoutInflater.from(pantallaPrincipalLicoreria.this);
         View promptView = layoutInflater.inflate(R.layout.acttel, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(pantallaPrincipalLicoreria.this);
@@ -251,7 +234,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                                 toast.setView(layout);
                                 toast.show();
 
-                                //Toast.makeText(getApplicationContext(), R.string.actualizacionTelefono, Toast.LENGTH_SHORT).show();
                                 telephone.setText(update.getText().toString().trim());
                             } else {
 
@@ -266,7 +248,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                                 toast.setDuration(Toast.LENGTH_SHORT);
                                 toast.setView(layout);
                                 toast.show();
-                                //Toast.makeText(getApplicationContext(), R.string.actualizacionError, Toast.LENGTH_SHORT).show();
                             }
                             loadingScreen.dismiss();
 
@@ -289,7 +270,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
         AlertDialog alert = builder.create();
 
         alert.show();
-        //
     }
 
 
@@ -297,10 +277,8 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
         String URL = getString(R.string.URL);
         String URL_GET = URL + "/drinkapp/actualizarNombre.php?nombre=";
         final String BACKURL = URL_GET;
-        //URL_GET = URL_GET + cod;
 
 
-        //
         LayoutInflater layoutInflater = LayoutInflater.from(pantallaPrincipalLicoreria.this);
         View promptView = layoutInflater.inflate(R.layout.actnom, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(pantallaPrincipalLicoreria.this);
@@ -368,7 +346,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
         AlertDialog alert = builder.create();
 
         alert.show();
-        //
     }
 
 
@@ -376,10 +353,7 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
         String URL = getString(R.string.URL);
         String URL_GET = URL + "/drinkapp/actualizarDescripcion.php?descripcion=";
         final String BACKURL = URL_GET;
-        //URL_GET = URL_GET + cod;
 
-
-        //
         LayoutInflater layoutInflater = LayoutInflater.from(pantallaPrincipalLicoreria.this);
         View promptView = layoutInflater.inflate(R.layout.actdes, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(pantallaPrincipalLicoreria.this);
@@ -413,7 +387,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                                 toast.setView(layout);
                                 toast.show();
 
-                                //Toast.makeText(getApplicationContext(), R.string.actualizacionDescripcion, Toast.LENGTH_SHORT).show();
                                 descripcionLicoreria.setText(update.getText().toString().trim());
                             } else {
 
@@ -429,7 +402,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                                 toast.setView(layout);
                                 toast.show();
 
-                                //Toast.makeText(getApplicationContext(), R.string.actualizacionError, Toast.LENGTH_SHORT).show();
                             }
                             loadingScreen.dismiss();
 
@@ -452,7 +424,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
         AlertDialog alert = builder.create();
 
         alert.show();
-        //
     }
 
 
@@ -460,10 +431,7 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
         String URL = getString(R.string.URL);
         String URL_GET = URL + "/drinkapp/actualizarUbicacion.php?ubicacion=";
         final String BACKURL = URL_GET;
-        //URL_GET = URL_GET + cod;
 
-
-        //
         LayoutInflater layoutInflater = LayoutInflater.from(pantallaPrincipalLicoreria.this);
         View promptView = layoutInflater.inflate(R.layout.actubi, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(pantallaPrincipalLicoreria.this);
@@ -496,7 +464,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                                 toast.setDuration(Toast.LENGTH_SHORT);
                                 toast.setView(layout);
                                 toast.show();
-                                //Toast.makeText(getApplicationContext(), R.string.actualizacionUbicacion, Toast.LENGTH_SHORT).show();
                                 ubii.setText(update.getText().toString().trim());
                             } else {
                                 LayoutInflater inflater = getLayoutInflater();
@@ -510,7 +477,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                                 toast.setDuration(Toast.LENGTH_SHORT);
                                 toast.setView(layout);
                                 toast.show();
-                                //Toast.makeText(getApplicationContext(), R.string.actualizacionError, Toast.LENGTH_SHORT).show();
                             }
                             loadingScreen.dismiss();
 
@@ -533,7 +499,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
         AlertDialog alert = builder.create();
 
         alert.show();
-        //
     }
 
 
@@ -542,10 +507,7 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
         String URL = getString(R.string.URL);
         String URL_GET = URL + "/drinkapp/actualizarUbicacionGPS.php?ubicaciongps=";
         final String BACKURL = URL_GET;
-        //URL_GET = URL_GET + cod;
 
-
-        //
         LayoutInflater layoutInflater = LayoutInflater.from(pantallaPrincipalLicoreria.this);
         View promptView = layoutInflater.inflate(R.layout.actubigps, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(pantallaPrincipalLicoreria.this);
@@ -553,8 +515,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
 
         final EditText update = (EditText) promptView.findViewById(R.id.actualizarubicaciogps);
 
-
-        //se toma la ubicacion gps automaticamente
         if (isLocationEnabled(getApplicationContext())) {
 
             getGPS();
@@ -576,7 +536,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
 
                         Log.e("pantallaActGPSDir:", actualizar);
 
-                        //++++++++++++++++++
                         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, actualizar, null,
                                 response -> {
                                     try {
@@ -594,7 +553,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                                             toast.setDuration(Toast.LENGTH_SHORT);
                                             toast.setView(layout);
                                             toast.show();
-                                            //Toast.makeText(getApplicationContext(), R.string.actualizacionUbicacionGPS, Toast.LENGTH_SHORT).show();
                                             ubiiGPS.setText(direccion);
                                         } else {
                                             LayoutInflater inflater = getLayoutInflater();
@@ -608,7 +566,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                                             toast.setDuration(Toast.LENGTH_SHORT);
                                             toast.setView(layout);
                                             toast.show();
-                                            //Toast.makeText(getApplicationContext(), R.string.actualizacionError, Toast.LENGTH_SHORT).show();
                                         }
                                         loadingScreen.dismiss();
 
@@ -625,8 +582,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                                 }
                         );
                         SingletonVolley.getInstanciaVolley(getApplicationContext()).addToRequestQueue(getRequest);
-                        //++++++++++++++++++
-
 
                     }
                 }, getMainLooper());
@@ -641,8 +596,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
         } else {
             Toast.makeText(getApplicationContext(), R.string.gpsEstadoInactivo, Toast.LENGTH_SHORT).show();
         }
-        //fin de toma automatica de gps
-
     }
 
 
@@ -650,10 +603,7 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
         String URL = getString(R.string.URL);
         String URL_GET = URL + "/drinkapp/actualizarPromocion.php?promocion=";
         final String BACKURL = URL_GET;
-        //URL_GET = URL_GET + cod;
 
-
-        //
 
 
         loadingScreen.show(getSupportFragmentManager(), "Espere...");
@@ -679,7 +629,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                             toast.setDuration(Toast.LENGTH_SHORT);
                             toast.setView(layout);
                             toast.show();
-                            //Toast.makeText(getApplicationContext(), R.string.actualizacionPromocion, Toast.LENGTH_SHORT).show();
                             promo.setText(promo.getText().toString().trim());
                         } else {
                             LayoutInflater inflater = getLayoutInflater();
@@ -693,7 +642,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                             toast.setDuration(Toast.LENGTH_SHORT);
                             toast.setView(layout);
                             toast.show();
-                            //Toast.makeText(getApplicationContext(), R.string.actualizacionError, Toast.LENGTH_SHORT).show();
                         }
                         loadingScreen.dismiss();
 
@@ -712,14 +660,11 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
         SingletonVolley.getInstanciaVolley(getApplicationContext()).addToRequestQueue(getRequest);
         actualizar = BACKURL;
 
-
-        //
     }
 
 
     private void actualizarFoto() {
 
-        //
         LayoutInflater layoutInflater = LayoutInflater.from(pantallaPrincipalLicoreria.this);
         View promptView = layoutInflater.inflate(R.layout.actfoto, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(pantallaPrincipalLicoreria.this, R.style.alertdialog);
@@ -735,8 +680,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
         AlertDialog alert = builder.create();
 
         alert.show();
-        //
-
 
     }
 
@@ -763,7 +706,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
                     Log.e("Respuesta===>", response.toString());
                     if (response.equals("200")) {
-                        //actualizar foto
                         fotografia.setImageBitmap(bitmap);
                         LayoutInflater inflater = getLayoutInflater();
                         View layout = inflater.inflate(R.layout.custom_toast_foto,
@@ -777,8 +719,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                         toast.setView(layout);
                         toast.show();
 
-                        //Toast.makeText(getApplicationContext(), R.string.actualizacionFoto, Toast.LENGTH_SHORT).show();
-
                     } else {
                         LayoutInflater inflater = getLayoutInflater();
                         View layout = inflater.inflate(R.layout.custom_toast_error,
@@ -791,7 +731,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                         toast.setDuration(Toast.LENGTH_SHORT);
                         toast.setView(layout);
                         toast.show();
-                        //Toast.makeText(getApplicationContext(), R.string.registroLicoreriaFallido, Toast.LENGTH_SHORT).show();
                     }
 
                 }, error -> {
@@ -806,9 +745,7 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                     toast.setDuration(Toast.LENGTH_SHORT);
                     toast.setView(layout);
                     toast.show();
-                    //Toast.makeText(getApplicationContext(), R.string.erroConexionVolley, Toast.LENGTH_SHORT).show();
-                    //error.toString();
-                    //error.getMessage();
+
                 }) {
                     @Override
                     public String getBodyContentType() {
@@ -852,7 +789,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
             toast.setDuration(Toast.LENGTH_SHORT);
             toast.setView(layout);
             toast.show();
-            //Toast.makeText(getApplicationContext(),R.string.actualizarFotoAviso, Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -879,7 +815,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                         Log.w("RESULTJOSN=>", resulJSON);
                         if (resulJSON.equals("1")) {
 
-                            //aqui hacer cambio
                             JSONObject object = response.getJSONObject("mensaje");
                             String estate = object.getString("est4d0");
 
@@ -903,7 +838,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                             toast.setDuration(Toast.LENGTH_SHORT);
                             toast.setView(layout);
                             toast.show();
-                            //Toast.makeText(getApplicationContext(), R.string.errorDesconexion, Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e) {
                         Log.e("AQUI", "AQUI");

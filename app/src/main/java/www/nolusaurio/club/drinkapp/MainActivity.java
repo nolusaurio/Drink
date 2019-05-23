@@ -43,10 +43,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ImageView registrarLic, buscarLic;
 
-    //para evitar la copia de la aplicacion se obtiene el imei
     private String imei;
 
-    //referencia a la clase sharedPreferences para indicar el uso de la app en el registro y d+
     sharedPreferences sharedPreferences;
 
     final DialogFragment loadingScreen = LoadingScreen.getInstance();
@@ -79,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
             toast.setDuration(Toast.LENGTH_SHORT);
             toast.setView(layout);
             toast.show();
-            //Toast.makeText(this, R.string.habilitarPermisos, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -99,14 +96,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkCode() {
-        //primero se verificara que la aplicacion ya estaba en uso de acuerdo a una bandera de sharedPreferences
         String banderaUSO = getBandera();
 
         String cod = "";
         Log.w("MAINACtivi Code Band==>", banderaUSO);
 
-        if (banderaUSO.equals("1")) { //significa que la aplicacion ya fue utilizada para el registro
-            //se procede a obtener el codigo utilizado y validar que el mismo codigo, estado e imei (si siguen activod)
+        if (banderaUSO.equals("1")) {
             cod = getCodigo();
             Log.w("MAINACtivi Code code==>", cod);
             verificarCodigoActivo(banderaUSO, cod);
@@ -159,7 +154,6 @@ public class MainActivity extends AppCompatActivity {
                                 toast1.setDuration(Toast.LENGTH_SHORT);
                                 toast1.setView(layout1);
                                 toast1.show();
-                                //Toast.makeText(getApplicationContext(), R.string.imeiDistinto, Toast.LENGTH_SHORT).show();
                                 registrarCodigo();
                                 break;
                             case "2":
@@ -174,7 +168,6 @@ public class MainActivity extends AppCompatActivity {
                                 toast2.setDuration(Toast.LENGTH_SHORT);
                                 toast2.setView(layout2);
                                 toast2.show();
-                                //toast2.makeText(getApplicationContext(), R.string.estadoInactivo, Toast.LENGTH_SHORT).show();
                                 registrarCodigo();
                                 break;
                             case "3":
@@ -201,7 +194,6 @@ public class MainActivity extends AppCompatActivity {
                                 toast4.setDuration(Toast.LENGTH_SHORT);
                                 toast4.setView(layout4);
                                 toast4.show();
-                                //Toast.makeText(getApplicationContext(), R.string.codigoInactivo, Toast.LENGTH_SHORT).show();
                                 registrarCodigo();
                                 break;
                             case "5":
@@ -216,7 +208,6 @@ public class MainActivity extends AppCompatActivity {
                                 toast5.setDuration(Toast.LENGTH_SHORT);
                                 toast5.setView(layout5);
                                 toast5.show();
-                                //Toast.makeText(getApplicationContext(), R.string.errorDesconocido, Toast.LENGTH_SHORT).show();
                                 break;
                         }
                         loadingScreen.dismiss();
@@ -237,7 +228,6 @@ public class MainActivity extends AppCompatActivity {
                     toast5.setDuration(Toast.LENGTH_SHORT);
                     toast5.setView(layout5);
                     toast5.show();
-                    //Toast.makeText(getApplicationContext(), R.string.errorDesconexion, Toast.LENGTH_SHORT).show();
                     loadingScreen.dismiss();
                 });
         URLVerificarCampos = BACKURL;
@@ -249,12 +239,10 @@ public class MainActivity extends AppCompatActivity {
     private void registrarCodigo() {
         Log.w("MAIN registrarCodigo>", "aca");
 
-        //setear a cero sharedpreferences
         sharedPreferences.guardarCodigo("");
         sharedPreferences.guardarRegistroLic("0");
         sharedPreferences.guardarEstadoSwitch("0");
 
-        //
 
         String URL = getApplication().getString(R.string.URL);
         String URLVerificacionCodigo = URL + "/drinkapp/verificarCodigo2.php?codigo=";
@@ -299,7 +287,6 @@ public class MainActivity extends AppCompatActivity {
 
                         try {
                             String resulJSON = response.getString("estado");
-                            //si es 2 es que el codigo esta activo
                             Log.e("MAINACTIVITY=======>", resulJSON);
                             if (resulJSON.equals("1")) {
                                 Intent i = new Intent(MainActivity.this, registroLicoreria.class);
@@ -311,7 +298,6 @@ public class MainActivity extends AppCompatActivity {
                                 sharedPreferences = new sharedPreferences(getApplicationContext());
                                 sharedPreferences.guardarRegistroAPP("0");
 
-                                //setear a cero sharedpreferences
                                 sharedPreferences.guardarCodigo("");
                                 sharedPreferences.guardarRegistroLic("0");
                                 sharedPreferences.guardarEstadoSwitch("0");
@@ -331,7 +317,6 @@ public class MainActivity extends AppCompatActivity {
                                 sharedPreferences = new sharedPreferences(getApplicationContext());
                                 sharedPreferences.guardarRegistroAPP("0");
 
-                                //setear a cero sharedpreferences
                                 sharedPreferences.guardarCodigo("");
                                 sharedPreferences.guardarRegistroLic("0");
                                 sharedPreferences.guardarEstadoSwitch("0");
@@ -351,7 +336,6 @@ public class MainActivity extends AppCompatActivity {
                                 sharedPreferences = new sharedPreferences(getApplicationContext());
                                 sharedPreferences.guardarRegistroAPP("0");
 
-                                //setear a cero sharedpreferences
                                 sharedPreferences.guardarCodigo("");
                                 sharedPreferences.guardarRegistroLic("0");
                                 sharedPreferences.guardarEstadoSwitch("0");
@@ -379,7 +363,6 @@ public class MainActivity extends AppCompatActivity {
                                 sharedPreferences = new sharedPreferences(getApplicationContext());
                                 sharedPreferences.guardarRegistroAPP("0");
 
-                                //setear a cero sharedpreferences
                                 sharedPreferences.guardarCodigo("");
                                 sharedPreferences.guardarRegistroLic("0");
                                 sharedPreferences.guardarEstadoSwitch("0");
@@ -399,12 +382,9 @@ public class MainActivity extends AppCompatActivity {
                                 sharedPreferences = new sharedPreferences(getApplicationContext());
                                 sharedPreferences.guardarRegistroAPP("0");
 
-                                //setear a cero sharedpreferences
                                 sharedPreferences.guardarCodigo("");
                                 sharedPreferences.guardarRegistroLic("0");
                                 sharedPreferences.guardarEstadoSwitch("0");
-
-                                //
 
 
                                 LayoutInflater inflater5 = getLayoutInflater();
@@ -442,8 +422,6 @@ public class MainActivity extends AppCompatActivity {
                         toast.setDuration(Toast.LENGTH_SHORT);
                         toast.setView(layout);
                         toast.show();
-                        //Toast.makeText(getApplicationContext(),"Error en servidores", Toast.LENGTH_SHORT).show();
-
                         loadingScreen.dismiss();
 
                     });
@@ -451,9 +429,7 @@ public class MainActivity extends AppCompatActivity {
             SingletonVolley.getInstanciaVolley(getApplicationContext()).addToRequestQueue(getRequest);
 
 
-        }).
-
-                setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+        }).setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
         AlertDialog alert = builder.create();
 
         alert.show();
@@ -580,7 +556,6 @@ public class MainActivity extends AppCompatActivity {
                 toast.setView(layout);
                 toast.show();
 
-                // Toast.makeText(MainActivity.this, R.string.dialogoPermisosGracias, Toast.LENGTH_SHORT).show();
                 botones();
             } else {
                 Log.e("MainActiviti=>", "onRequestPermissionsResult");

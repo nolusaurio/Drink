@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 
-import java.util.Timer;
 
 public class Splash extends AppCompatActivity {
 

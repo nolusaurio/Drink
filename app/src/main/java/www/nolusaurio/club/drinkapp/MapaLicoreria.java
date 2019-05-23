@@ -57,7 +57,7 @@ public class MapaLicoreria extends AppCompatActivity implements OnMapReadyCallba
         mapView = (MapView) findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
 
-        Bundle bundle = getIntent().getExtras(); //obtener coordenadas e imagen
+        Bundle bundle = getIntent().getExtras();
 
         if(bundle != null) {
             String coordenadas = bundle.getString("gps");
@@ -108,7 +108,6 @@ public class MapaLicoreria extends AppCompatActivity implements OnMapReadyCallba
             toast.setDuration(Toast.LENGTH_SHORT);
             toast.setView(layout);
             toast.show();
-           // Toast.makeText(this, "No existe lugar", Toast.LENGTH_SHORT).show();
         }
 
 

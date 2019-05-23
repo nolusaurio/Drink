@@ -1,12 +1,9 @@
 package www.nolusaurio.club.drinkapp;
 
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,17 +14,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
-import com.android.volley.toolbox.Volley;
-import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+
 
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 
-import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.myViewHolder> {
 
@@ -79,10 +73,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         tel = mData.get(i).getTelefono();
         state = mData.get(i).getState();
 
-        //para el paso de imagen
         final ByteArrayOutputStream bs = new ByteArrayOutputStream();
-
-        //intent de paso verificando los valores
 
         Log.w(TAG, "Obteniendo valores");
         Log.w(TAG, nombre + "," + descripcion + "," + ubicacion + "," + promocion + "," + ubiGPS);
@@ -95,8 +86,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         ii.putExtra("ubiGPS", ubiGPS);
         ii.putExtra("telefono", tel);
         ii.putExtra("estado", state);
-        //enviando la posicion para la imagen si no carga al momento de la lista inicial
-        //y asi evitar un nullpointer exception
         ii.putExtra("posicion",mData.get(i).getRuta());
 
         Log.e("RECYCLERVIEW=======>", promocion);
@@ -126,7 +115,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         URL_IMAGEN = BACK_URL;
 
 
-        //click listener
         myViewHolder.cardView.setOnClickListener(v -> {
 
             Log.e(TAG, "onclick");

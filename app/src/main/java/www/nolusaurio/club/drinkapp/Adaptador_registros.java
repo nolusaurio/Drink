@@ -1,11 +1,9 @@
 package www.nolusaurio.club.drinkapp;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +20,6 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
 
 public class Adaptador_registros extends RecyclerView.Adapter<Adaptador_registros.registrosViewHolder> implements
         View.OnClickListener {
@@ -160,7 +157,6 @@ public class Adaptador_registros extends RecyclerView.Adapter<Adaptador_registro
             });
             SingletonVolley.getInstanciaVolley(context).addToRequestQueue(request);
 
-            //////////
 
         }
 

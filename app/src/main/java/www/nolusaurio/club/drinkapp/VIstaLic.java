@@ -96,8 +96,6 @@ public class VIstaLic extends AppCompatActivity {
             String pp = bundle.getString("posicion");
 
 
-
-            //mostrando si esta abierto o cerrado
             Animation animation = new AlphaAnimation(0.0f, 1.0f);
             animation.setDuration(50);
             animation.setStartOffset(300);
@@ -191,25 +189,18 @@ public class VIstaLic extends AppCompatActivity {
 
                     EditText editText = (EditText) promptView.findViewById(R.id.consulta);
                     EditText nom = (EditText) promptView.findViewById(R.id.nombreConsul);
-                    // setup a dialog window
                     alertDialogBuilder.setCancelable(false)
-                            .setPositiveButton("Enviar", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
+                            .setPositiveButton("Enviar", (dialog, id) -> {
 
 
-                                    String nombre = moderar(nom.getText().toString().trim());
-                                    String comentario = moderar(editText.getText().toString().trim());
+                                String nombre = moderar(nom.getText().toString().trim());
+                                String comentario = moderar(editText.getText().toString().trim());
 
 
-                                    aniadirComentario(nombre, comentario);
-                                }
+                                aniadirComentario(nombre, comentario);
                             })
                             .setNegativeButton("Cancelar",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            dialog.cancel();
-                                        }
-                                    });
+                                    (dialog, id) -> dialog.cancel());
 
                     AlertDialog alert = alertDialogBuilder.create();
                     alert.show();
@@ -308,8 +299,6 @@ public class VIstaLic extends AppCompatActivity {
 
         });
         SingletonVolley.getInstanciaVolley(getApplicationContext()).addToRequestQueue(request);
-
-        //////////
 
     }
 

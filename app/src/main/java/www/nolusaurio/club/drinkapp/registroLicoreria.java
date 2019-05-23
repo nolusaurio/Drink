@@ -46,7 +46,6 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.gson.JsonObject;
 
 
 import org.json.JSONException;
@@ -62,17 +61,14 @@ public class registroLicoreria extends AppCompatActivity {
     private FusedLocationProviderClient client;
     LocationRequest locationRequest;
 
-    //datos del boton que obtiene la localizacion
     private Button loc;
     private EditText gpss;
 
-    //datos comunes
     private EditText nombreDueño, apellidoDueño, nombreLic, descripcion, ubicacion, tele; //gpss textviews
     private ImageView captura;
     private Button registrar, reiniciar, cancelar, foto, cargarFoto; //loc
 
 
-    //datos para tomar foto
     private static final String CARPETA_PRINCIPAL = "drinkapp/"; //directorio principal
     private static final String CARPETA_IMAGEN = "imagenes"; //carpeta donde se guardaran las imagenes
     private static final String DIRECTORIO_IMAGEN = CARPETA_PRINCIPAL + CARPETA_IMAGEN; //ruta carpeta de directorio
@@ -81,15 +77,11 @@ public class registroLicoreria extends AppCompatActivity {
     Bitmap bitmap;
     private static final int COD_FOTO = 20;
 
-
-    //contador de campos llenos o vacios para pasar a registro
     private int conteoInverso = 1;
 
 
-    //para codigo de registro se obtiene la clase sharedPreferences
     sharedPreferences sharedPreferences;
 
-    //progres
     final DialogFragment loadingScreen = LoadingScreen.getInstance();
 
 
@@ -103,7 +95,6 @@ public class registroLicoreria extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //referenciados todos los datos
         loc = (Button) findViewById(R.id.ubicacionGPS);
         gpss = (EditText) findViewById(R.id.licoreriaUbicacionGPS);
 
@@ -154,7 +145,6 @@ public class registroLicoreria extends AppCompatActivity {
                     toast.setDuration(Toast.LENGTH_SHORT);
                     toast.setView(layout);
                     toast.show();
-                    //Toast.makeText(getApplicationContext(), R.string.gpsEstadoInactivo, Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -205,8 +195,6 @@ public class registroLicoreria extends AppCompatActivity {
             toast.setDuration(Toast.LENGTH_SHORT);
             toast.setView(layout);
             toast.show();
-
-            //Toast.makeText(getApplicationContext(), "Enviando datos", Toast.LENGTH_SHORT).show();
             registrarLicoreria();
 
         } else {
@@ -222,7 +210,6 @@ public class registroLicoreria extends AppCompatActivity {
             toast.setDuration(Toast.LENGTH_SHORT);
             toast.setView(layout);
             toast.show();
-            // Toast.makeText(getApplicationContext(), R.string.advertenciaLicoreriaVacio, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -235,8 +222,6 @@ public class registroLicoreria extends AppCompatActivity {
         bitmap = redimensionarImagen(bitmap, 500, 500);
         String img = convertirImgString(bitmap);
 
-
-        //verificando el nombre de la licoreria
         String verificacion = URL + "/drinkapp/verificarNombre.php?nombre=";
         String verificarNombreDoble = verificacion + nombreLic.getText().toString().trim();
         Log.w("REGISTROLICORERIA:", verificarNombreDoble);
@@ -422,7 +407,6 @@ public class registroLicoreria extends AppCompatActivity {
             String nombre = consecutivo.toString() + ".jpg";
             path = Environment.getExternalStorageDirectory() + File.separator + DIRECTORIO_IMAGEN
                     + File.separator + nombre; //ruta de almacenamiento
-            //path = FileProvider.getUriForFile(registroLicoreria.this, )
 
             fileImagen = new File(path);
 
@@ -431,7 +415,6 @@ public class registroLicoreria extends AppCompatActivity {
             Uri uri = FileProvider.getUriForFile(registroLicoreria.this,
                     "www.nolusaurio.club.drinkapp.provider", fileImagen);
 
-            //intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(fileImagen));
             intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
 
             startActivityForResult(intent, COD_FOTO);
@@ -483,9 +466,6 @@ public class registroLicoreria extends AppCompatActivity {
                         (path, uri) -> Log.i("PATH", "" + path));
                 bitmap = BitmapFactory.decodeFile(path);
 
-                //aca va
-
-                //aca fin
 
                 if (bitmap == null) {
                     Log.w("CARG BIT===>", "null");
