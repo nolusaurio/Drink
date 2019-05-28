@@ -215,137 +215,153 @@ public class registroLicoreria extends AppCompatActivity {
 
         loadingScreen.show(getSupportFragmentManager(), "Espere...");
 
-        bitmap = redimensionarImagen(bitmap, 500, 500);
-        String img = convertirImgString(bitmap);
 
-        String verificacion = URL + "/verificarNombre.php?nombre=";
-        String verificarNombreDoble = verificacion + nombreLic.getText().toString().trim();
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, verificarNombreDoble, null, response -> {
-            try {
-                String resulJSON = response.getString("estado");
-                if (resulJSON.equals("1")) {
-                    JSONObject jsonObject = new JSONObject();
-                    try {
-                        jsonObject.put("nombre", nombreDueño.getText().toString().trim());
-                        jsonObject.put("apellido", apellidoDueño.getText().toString().trim());
-                        jsonObject.put("telefono", tele.getText().toString().trim());
-                        jsonObject.put("nombreLic", nombreLic.getText().toString().trim());
-                        jsonObject.put("descripcionLic", descripcion.getText().toString().trim());
-                        jsonObject.put("ubicacionLic", ubicacion.getText().toString().trim());
-                        jsonObject.put("ubicacionGPSLic", gpss.getText().toString().trim());
-                        jsonObject.put("codigoregistro", getCodigo());
-                        jsonObject.put("imagen", img + "\\}");
-                        final String requestBody = jsonObject.toString();
+        if (bitmap != null) {
 
 
-                        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, responsse -> {
-                            if (responsse.equals("200")) {
-                                LayoutInflater inflater = getLayoutInflater();
-                                View layout = inflater.inflate(R.layout.custom_toast_registroexitoso,
-                                        (ViewGroup) findViewById(R.id.custom_toast_registroexitoso));
+            bitmap = redimensionarImagen(bitmap, 500, 500);
+            String img = convertirImgString(bitmap);
 
-                                TextView men = (TextView) layout.findViewById(R.id.mensaje);
-                                men.setText(R.string.registroLicoreriaExitoso);
-                                Toast toast = new Toast(getApplicationContext());
-                                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                                toast.setDuration(Toast.LENGTH_SHORT);
-                                toast.setView(layout);
-                                toast.show();
+            String verificacion = URL + "/verificarNombre.php?nombre=";
+            String verificarNombreDoble = verificacion + nombreLic.getText().toString().trim();
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, verificarNombreDoble, null, response -> {
+                try {
+                    String resulJSON = response.getString("estado");
+                    if (resulJSON.equals("1")) {
+                        JSONObject jsonObject = new JSONObject();
+                        try {
+                            jsonObject.put("nombre", nombreDueño.getText().toString().trim());
+                            jsonObject.put("apellido", apellidoDueño.getText().toString().trim());
+                            jsonObject.put("telefono", tele.getText().toString().trim());
+                            jsonObject.put("nombreLic", nombreLic.getText().toString().trim());
+                            jsonObject.put("descripcionLic", descripcion.getText().toString().trim());
+                            jsonObject.put("ubicacionLic", ubicacion.getText().toString().trim());
+                            jsonObject.put("ubicacionGPSLic", gpss.getText().toString().trim());
+                            jsonObject.put("codigoregistro", getCodigo());
+                            jsonObject.put("imagen", img + "\\}");
+                            final String requestBody = jsonObject.toString();
 
-                                sharedPreferences = new sharedPreferences(getApplicationContext());
-                                sharedPreferences.guardarRegistroLic("1");
-                                Intent i = new Intent(registroLicoreria.this, pantallaPrincipalLicoreria.class);
-                                startActivity(i);
-                                finish();
 
-                            } else {
-                                sharedPreferences = new sharedPreferences(getApplicationContext());
-                                sharedPreferences.guardarRegistroLic("-1");
+                            StringRequest stringRequest = new StringRequest(Request.Method.POST, url, responsse -> {
+                                if (responsse.equals("200")) {
+                                    LayoutInflater inflater = getLayoutInflater();
+                                    View layout = inflater.inflate(R.layout.custom_toast_registroexitoso,
+                                            (ViewGroup) findViewById(R.id.custom_toast_registroexitoso));
+
+                                    TextView men = (TextView) layout.findViewById(R.id.mensaje);
+                                    men.setText(R.string.registroLicoreriaExitoso);
+                                    Toast toast = new Toast(getApplicationContext());
+                                    toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                                    toast.setDuration(Toast.LENGTH_SHORT);
+                                    toast.setView(layout);
+                                    toast.show();
+
+                                    sharedPreferences = new sharedPreferences(getApplicationContext());
+                                    sharedPreferences.guardarRegistroLic("1");
+                                    Intent i = new Intent(registroLicoreria.this, pantallaPrincipalLicoreria.class);
+                                    startActivity(i);
+                                    finish();
+
+                                } else {
+                                    sharedPreferences = new sharedPreferences(getApplicationContext());
+                                    sharedPreferences.guardarRegistroLic("-1");
+                                    LayoutInflater inflater = getLayoutInflater();
+                                    View layout = inflater.inflate(R.layout.custom_toast_error,
+                                            (ViewGroup) findViewById(R.id.custom_toast_error));
+
+                                    TextView men = (TextView) layout.findViewById(R.id.mensaje);
+                                    men.setText(R.string.registroLicoreriaFallido);
+                                    Toast toast = new Toast(getApplicationContext());
+                                    toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                                    toast.setDuration(Toast.LENGTH_SHORT);
+                                    toast.setView(layout);
+                                    toast.show();
+                                }
+                                loadingScreen.dismiss();
+
+
+                            }, error -> {
                                 LayoutInflater inflater = getLayoutInflater();
                                 View layout = inflater.inflate(R.layout.custom_toast_error,
                                         (ViewGroup) findViewById(R.id.custom_toast_error));
 
                                 TextView men = (TextView) layout.findViewById(R.id.mensaje);
-                                men.setText(R.string.registroLicoreriaFallido);
+                                men.setText(R.string.erroConexionVolley);
                                 Toast toast = new Toast(getApplicationContext());
                                 toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                                 toast.setDuration(Toast.LENGTH_SHORT);
                                 toast.setView(layout);
                                 toast.show();
-                            }
-                            loadingScreen.dismiss();
 
-
-                        }, error -> {
-                            LayoutInflater inflater = getLayoutInflater();
-                            View layout = inflater.inflate(R.layout.custom_toast_error,
-                                    (ViewGroup) findViewById(R.id.custom_toast_error));
-
-                            TextView men = (TextView) layout.findViewById(R.id.mensaje);
-                            men.setText(R.string.erroConexionVolley);
-                            Toast toast = new Toast(getApplicationContext());
-                            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                            toast.setDuration(Toast.LENGTH_SHORT);
-                            toast.setView(layout);
-                            toast.show();
-
-                            error.toString();
-                            error.getMessage();
-                            loadingScreen.dismiss();
-                        }) {
-                            @Override
-                            public String getBodyContentType() {
-                                return "application/json; charset=utf-8";
-                            }
-
-                            @Override
-                            public byte[] getBody() throws AuthFailureError {
-                                try {
-                                    return requestBody == null ? null : requestBody.getBytes("utf-8");
-                                } catch (UnsupportedEncodingException e) {
-                                    VolleyLog.wtf("UnsupportedEncodingException", requestBody, "utf-8");
-                                    return null;
+                                error.toString();
+                                error.getMessage();
+                                loadingScreen.dismiss();
+                            }) {
+                                @Override
+                                public String getBodyContentType() {
+                                    return "application/json; charset=utf-8";
                                 }
-                            }
 
-                            @Override
-                            protected Response<String> parseNetworkResponse(NetworkResponse response) {
-                                String responseString = "";
-                                if (response != null) {
-                                    responseString = String.valueOf(response.statusCode);
+                                @Override
+                                public byte[] getBody() throws AuthFailureError {
+                                    try {
+                                        return requestBody == null ? null : requestBody.getBytes("utf-8");
+                                    } catch (UnsupportedEncodingException e) {
+                                        VolleyLog.wtf("UnsupportedEncodingException", requestBody, "utf-8");
+                                        return null;
+                                    }
                                 }
-                                return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
-                            }
-                        };
-                        SingletonVolley.getInstanciaVolley(getApplicationContext()).addToRequestQueue(stringRequest);
+
+                                @Override
+                                protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                                    String responseString = "";
+                                    if (response != null) {
+                                        responseString = String.valueOf(response.statusCode);
+                                    }
+                                    return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
+                                }
+                            };
+                            SingletonVolley.getInstanciaVolley(getApplicationContext()).addToRequestQueue(stringRequest);
+                            loadingScreen.dismiss();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            loadingScreen.dismiss();
+                        }
+
+                    } else if (resulJSON.equals("2")) {
+
+                        Toast.makeText(getApplicationContext(), "error el nombre existe", Toast.LENGTH_SHORT).show();
                         loadingScreen.dismiss();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+
+                    } else if (resulJSON.equals("3")) {
+                        Toast.makeText(getApplicationContext(), "error en servidores, intente nuevamente", Toast.LENGTH_SHORT).show();
+                        loadingScreen.dismiss();
+                    } else if (resulJSON.equals("4")) {
+                        String valor = response.getString("mensaje");
+
+                        Toast.makeText(getApplicationContext(), "error des:" + valor, Toast.LENGTH_SHORT).show();
                         loadingScreen.dismiss();
                     }
-
-                } else if (resulJSON.equals("2")) {
-
-                    Toast.makeText(getApplicationContext(), "error el nombre existe", Toast.LENGTH_SHORT).show();
-                    loadingScreen.dismiss();
-
-                } else if (resulJSON.equals("3")) {
-                    Toast.makeText(getApplicationContext(), "error en servidores, intente nuevamente", Toast.LENGTH_SHORT).show();
-                    loadingScreen.dismiss();
-                } else if (resulJSON.equals("4")){
-                    String valor = response.getString("mensaje");
-
-                    Toast.makeText(getApplicationContext(), "error des:"+valor, Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
                     loadingScreen.dismiss();
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
-                loadingScreen.dismiss();
-            }
-        }, error -> {
-        });
-        SingletonVolley.getInstanciaVolley(getApplicationContext()).addToRequestQueue(request);
+            }, error -> {
+            });
+            SingletonVolley.getInstanciaVolley(getApplicationContext()).addToRequestQueue(request);
+        } else {
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.custom_toast_error_tipoimagen,
+                    (ViewGroup) findViewById(R.id.custom_toast_error_tipoimagen));
 
+            TextView men = (TextView) layout.findViewById(R.id.errorimagen);
+            men.setText(R.string.errorimagen);
+            Toast toast = new Toast(getApplicationContext());
+            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            toast.setDuration(Toast.LENGTH_SHORT);
+            toast.setView(layout);
+            toast.show();
+        }
 
 
     }
@@ -468,7 +484,7 @@ public class registroLicoreria extends AppCompatActivity {
 
     private void cargarFotografia() {
         Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        i.setType("image/");
+        i.setType("image/jpg");
         startActivityForResult(i.createChooser(i, "Seleccione la aplicación"), 100);
         conteoInverso = 0;
     }

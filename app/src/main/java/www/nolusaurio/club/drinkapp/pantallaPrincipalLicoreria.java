@@ -663,90 +663,104 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
 
         if (bandera == 1) {
 
+            if (bitmap != null) {
 
-            bitmap = redimensionarImagen(bitmap, 500, 500);
-            String img = convertirImgString(bitmap);
+                bitmap = redimensionarImagen(bitmap, 500, 500);
+                String img = convertirImgString(bitmap);
 
-            JSONObject jsonObject = new JSONObject();
-            try {
-                jsonObject.put("nombrelic", nombre);
-                jsonObject.put("codigo", getCodigo());
-                jsonObject.put("imagen", img + "\"\\}");
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("nombrelic", nombre);
+                    jsonObject.put("codigo", getCodigo());
+                    jsonObject.put("imagen", img + "\"\\}");
 
-                final String requestBody = jsonObject.toString();
+                    final String requestBody = jsonObject.toString();
 
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
-                    if (response.equals("200")) {
-                        fotografia.setImageBitmap(bitmap);
-                        LayoutInflater inflater = getLayoutInflater();
-                        View layout = inflater.inflate(R.layout.custom_toast_foto,
-                                (ViewGroup) findViewById(R.id.custom_toast_gen));
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
+                        if (response.equals("200")) {
+                            fotografia.setImageBitmap(bitmap);
+                            LayoutInflater inflater = getLayoutInflater();
+                            View layout = inflater.inflate(R.layout.custom_toast_foto,
+                                    (ViewGroup) findViewById(R.id.custom_toast_gen));
 
-                        TextView men = (TextView) layout.findViewById(R.id.mensaje);
-                        men.setText(R.string.actualizacionFoto);
-                        Toast toast = new Toast(getApplicationContext());
-                        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                        toast.setDuration(Toast.LENGTH_SHORT);
-                        toast.setView(layout);
-                        toast.show();
+                            TextView men = (TextView) layout.findViewById(R.id.mensaje);
+                            men.setText(R.string.actualizacionFoto);
+                            Toast toast = new Toast(getApplicationContext());
+                            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                            toast.setDuration(Toast.LENGTH_SHORT);
+                            toast.setView(layout);
+                            toast.show();
 
-                    } else {
+                        } else {
+                            LayoutInflater inflater = getLayoutInflater();
+                            View layout = inflater.inflate(R.layout.custom_toast_error,
+                                    (ViewGroup) findViewById(R.id.custom_toast_error));
+
+                            TextView men = (TextView) layout.findViewById(R.id.mensaje);
+                            men.setText(R.string.registroLicoreriaFallido);
+                            Toast toast = new Toast(getApplicationContext());
+                            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                            toast.setDuration(Toast.LENGTH_SHORT);
+                            toast.setView(layout);
+                            toast.show();
+                        }
+
+                    }, error -> {
                         LayoutInflater inflater = getLayoutInflater();
                         View layout = inflater.inflate(R.layout.custom_toast_error,
                                 (ViewGroup) findViewById(R.id.custom_toast_error));
 
                         TextView men = (TextView) layout.findViewById(R.id.mensaje);
-                        men.setText(R.string.registroLicoreriaFallido);
+                        men.setText(R.string.erroConexionVolley);
                         Toast toast = new Toast(getApplicationContext());
                         toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                         toast.setDuration(Toast.LENGTH_SHORT);
                         toast.setView(layout);
                         toast.show();
-                    }
 
-                }, error -> {
-                    LayoutInflater inflater = getLayoutInflater();
-                    View layout = inflater.inflate(R.layout.custom_toast_error,
-                            (ViewGroup) findViewById(R.id.custom_toast_error));
-
-                    TextView men = (TextView) layout.findViewById(R.id.mensaje);
-                    men.setText(R.string.erroConexionVolley);
-                    Toast toast = new Toast(getApplicationContext());
-                    toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                    toast.setDuration(Toast.LENGTH_SHORT);
-                    toast.setView(layout);
-                    toast.show();
-
-                }) {
-                    @Override
-                    public String getBodyContentType() {
-                        return "application/json; charset=utf-8";
-                    }
-
-                    @Override
-                    public byte[] getBody() throws AuthFailureError {
-                        try {
-                            return requestBody == null ? null : requestBody.getBytes("utf-8");
-                        } catch (UnsupportedEncodingException e) {
-                            VolleyLog.wtf("UnsupportedEncodingException", requestBody, "utf-8");
-                            return null;
+                    }) {
+                        @Override
+                        public String getBodyContentType() {
+                            return "application/json; charset=utf-8";
                         }
-                    }
 
-                    @Override
-                    protected Response<String> parseNetworkResponse(NetworkResponse response) {
-                        String responseString = "";
-                        if (response != null) {
-                            responseString = String.valueOf(response.statusCode);
+                        @Override
+                        public byte[] getBody() throws AuthFailureError {
+                            try {
+                                return requestBody == null ? null : requestBody.getBytes("utf-8");
+                            } catch (UnsupportedEncodingException e) {
+                                VolleyLog.wtf("UnsupportedEncodingException", requestBody, "utf-8");
+                                return null;
+                            }
                         }
-                        return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
-                    }
-                };
-                SingletonVolley.getInstanciaVolley(getApplicationContext()).addToRequestQueue(stringRequest);
+
+                        @Override
+                        protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                            String responseString = "";
+                            if (response != null) {
+                                responseString = String.valueOf(response.statusCode);
+                            }
+                            return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
+                        }
+                    };
+                    SingletonVolley.getInstanciaVolley(getApplicationContext()).addToRequestQueue(stringRequest);
 
 
-            } catch (JSONException e) {
-                e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                LayoutInflater inflater = getLayoutInflater();
+                View layout = inflater.inflate(R.layout.custom_toast_error_tipoimagen,
+                        (ViewGroup) findViewById(R.id.custom_toast_error_tipoimagen));
+
+                TextView men = (TextView) layout.findViewById(R.id.errorimagen);
+                men.setText(R.string.errorimagen);
+                Toast toast = new Toast(getApplicationContext());
+                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                toast.setDuration(Toast.LENGTH_SHORT);
+                toast.setView(layout);
+                toast.show();
             }
         } else {
             LayoutInflater inflater = getLayoutInflater();
@@ -775,7 +789,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
         String URL_GET = URL + "/getData.php?codigo=";
         final String BACKURL = URL_GET;
         URL_GET = URL_GET + cod;
-
 
 
         final JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, URL_GET, null,
@@ -1142,6 +1155,8 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
     }
 
     private Bitmap redimensionarImagen(Bitmap bitmap, float anchoNuevo, float altoNuevo) {
+
+
         int ancho = bitmap.getWidth();
         int alto = bitmap.getHeight();
 
@@ -1155,6 +1170,7 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
         } else {
             return bitmap;
         }
+
     }
 
     private void camara() {
@@ -1229,7 +1245,8 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
 
     private void cargarFotografia() {
         Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        i.setType("image/");
+        i.setType("image/jpg");
+
         bandera = 1;
         startActivityForResult(i.createChooser(i, "Seleccione la aplicaciòn"), 100);
     }

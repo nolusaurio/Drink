@@ -74,7 +74,7 @@
 
     <string name="actualizacionFoto">Foto actualizada</string>
     <string name="actualizacionError">Error en actualización de campos, intente nuevamente</string>
-
+    <string name="errorimagen">Debe seleccionar una imagen y no otro tipo de archivo.</string>
     <string name="av_actnom">Ingrese el nuevo nombre</string>
     <string name="av_actdes">Ingrese la nueva descripción</string>
     <string name="av_actubi">Ingrese la nueva ubicación</string>
