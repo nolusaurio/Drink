@@ -6,7 +6,6 @@ import android.graphics.Matrix;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -61,7 +60,6 @@ public class MapaLicoreria extends AppCompatActivity implements OnMapReadyCallba
 
         if(bundle != null) {
             String coordenadas = bundle.getString("gps");
-            Log.w(TAG, coordenadas);
 
 
 

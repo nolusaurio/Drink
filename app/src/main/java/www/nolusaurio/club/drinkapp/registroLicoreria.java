@@ -19,7 +19,6 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -118,20 +117,17 @@ public class registroLicoreria extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (isLocationEnabled(getApplicationContext())) {
-                    Log.w("REGISTRO:", "aca");
                     getGPS();
 
                     client.requestLocationUpdates(locationRequest, new LocationCallback() {
                         @Override
                         public void onLocationResult(LocationResult locationResult) {
                             super.onLocationResult(locationResult);
-                            Log.w("REGISTRO2:", "" + locationResult.getLastLocation().getLatitude() + "," + locationResult.getLastLocation().getLongitude());
 
                             gpss.setText(locationResult.getLastLocation().getLatitude() + "," + locationResult.getLastLocation().getLongitude());
                             client.removeLocationUpdates(this);
                         }
                     }, getMainLooper());
-                    Log.w("REGISTRO3:", "aca");
 
                 } else {
                     LayoutInflater inflater = getLayoutInflater();
@@ -224,11 +220,9 @@ public class registroLicoreria extends AppCompatActivity {
 
         String verificacion = URL + "/verificarNombre.php?nombre=";
         String verificarNombreDoble = verificacion + nombreLic.getText().toString().trim();
-        Log.w("REGISTROLICORERIA:", verificarNombreDoble);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, verificarNombreDoble, null, response -> {
             try {
                 String resulJSON = response.getString("estado");
-                Log.w("REGISTROLICORERIA:", "ResultJson:"+resulJSON);
                 if (resulJSON.equals("1")) {
                     JSONObject jsonObject = new JSONObject();
                     try {
@@ -242,11 +236,9 @@ public class registroLicoreria extends AppCompatActivity {
                         jsonObject.put("codigoregistro", getCodigo());
                         jsonObject.put("imagen", img + "\\}");
                         final String requestBody = jsonObject.toString();
-                        Log.w("pantPrin=========>", url);
-                        Log.w("String===>", requestBody.toString().trim());
+
 
                         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, responsse -> {
-                            Log.w("Respuesta===>", responsse.toString());
                             if (responsse.equals("200")) {
                                 LayoutInflater inflater = getLayoutInflater();
                                 View layout = inflater.inflate(R.layout.custom_toast_registroexitoso,
@@ -392,17 +384,14 @@ public class registroLicoreria extends AppCompatActivity {
 
     private void camara() {
 
-        Log.w("CAMARA=======>", "aqui");
         File miFile = new File(Environment.getExternalStorageDirectory(), DIRECTORIO_IMAGEN);
         boolean isCreated = miFile.exists();
 
         if (isCreated == false) {
-            Log.w("CAMARA=======>", "false");
             isCreated = miFile.mkdirs();
         }
 
         if (isCreated == true) {
-            Log.w("CAMARA=======>", "true");
             Long consecutivo = System.currentTimeMillis() / 1000;
             String nombre = consecutivo.toString() + ".jpg";
             path = Environment.getExternalStorageDirectory() + File.separator + DIRECTORIO_IMAGEN
@@ -419,7 +408,6 @@ public class registroLicoreria extends AppCompatActivity {
 
             startActivityForResult(intent, COD_FOTO);
             conteoInverso = 0;
-            Log.w("CAMARA=======>", "aqui salida con:" + conteoInverso);
 
         }
     }
@@ -445,12 +433,10 @@ public class registroLicoreria extends AppCompatActivity {
             } else {
                 if (resultCode == RESULT_OK) {
 
-                    Log.w("CARG 0====>", "foto");
                     MediaScannerConnection.scanFile(this, new String[]{path}, null,
                             new MediaScannerConnection.OnScanCompletedListener() {
                                 @Override
                                 public void onScanCompleted(String path, Uri uri) {
-                                    Log.i("PATH", "" + path);
                                 }
                             });
                     bitmap = BitmapFactory.decodeFile(path);
@@ -461,18 +447,15 @@ public class registroLicoreria extends AppCompatActivity {
 
         switch (requestCode) {
             case COD_FOTO:
-                Log.w("CARG====>", "foto");
                 MediaScannerConnection.scanFile(this, new String[]{path}, null,
-                        (path, uri) -> Log.i("PATH", "" + path));
+                        (path, uri) -> {
+                        });
                 bitmap = BitmapFactory.decodeFile(path);
 
 
                 if (bitmap == null) {
-                    Log.w("CARG BIT===>", "null");
                     conteoInverso = 1;
                 } else {
-                    Log.w("CARG BIT===>", "no null");
-
                 }
 
                 captura.setImageBitmap(bitmap);
@@ -505,7 +488,6 @@ public class registroLicoreria extends AppCompatActivity {
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     private void getGPS() {
-        Log.w("registroLicoreroGPS", "aca");
         locationRequest = new LocationRequest();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         locationRequest.setInterval(100);
@@ -516,12 +498,10 @@ public class registroLicoreria extends AppCompatActivity {
     public static Boolean isLocationEnabled(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             LocationManager lm = (LocationManager) context.getSystemService(context.LOCATION_SERVICE);
-            Log.w("registroLicoreroa", "trueeeeee");
             return lm.isLocationEnabled();
         } else {
             int mode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE,
                     Settings.Secure.LOCATION_MODE_OFF);
-            Log.w("registroLicoreroa", "false");
 
             return (mode != Settings.Secure.LOCATION_MODE_OFF);
 
@@ -545,7 +525,6 @@ public class registroLicoreria extends AppCompatActivity {
     private String getCodigo() {
         sharedPreferences = new sharedPreferences(getApplicationContext());
         String bandera = sharedPreferences.getCodigo();
-        Log.w("registrLic getCod==>", bandera);
         return bandera;
     }
 

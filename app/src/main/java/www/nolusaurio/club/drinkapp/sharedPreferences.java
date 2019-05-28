@@ -2,7 +2,6 @@ package www.nolusaurio.club.drinkapp;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 public class sharedPreferences {
     SharedPreferences preferences;
@@ -11,7 +10,6 @@ public class sharedPreferences {
     }
 
     public void guardarRegistroAPP(String codigo){
-        Log.w("SHAREDPREFERENCES gAP=>", codigo);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("registroAPP", codigo);
         editor.commit();
@@ -24,7 +22,6 @@ public class sharedPreferences {
     }
 
     public void guardarCodigo(String codigo){
-        Log.w("SHAREDPREFERENCES gC=>", codigo);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("codigoUT", codigo);
         editor.commit();

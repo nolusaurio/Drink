@@ -15,7 +15,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,10 +61,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (Permisos()) {
-            Log.w("Permisos", "true");
             botones();
         } else {
-            Log.w("Permisos", "false");
             LayoutInflater inflater = getLayoutInflater();
             View layout = inflater.inflate(R.layout.custom_toast_permisos,
                     (ViewGroup) findViewById(R.id.custom_toast_permisos));
@@ -99,11 +96,9 @@ public class MainActivity extends AppCompatActivity {
         String banderaUSO = getBandera();
 
         String cod = "";
-        Log.w("MAINACtivi Code Band==>", banderaUSO);
 
         if (banderaUSO.equals("1")) {
             cod = getCodigo();
-            Log.w("MAINACtivi Code code==>", cod);
             verificarCodigoActivo(banderaUSO, cod);
         } else {
             registrarCodigo();
@@ -111,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void verificarCodigoActivo(String bandera, String cod) {
-        Log.w("MAINACtiv verificarCod>", "aca");
 
         loadingScreen.show(getSupportFragmentManager(), "Espere...");
 
@@ -134,13 +128,11 @@ public class MainActivity extends AppCompatActivity {
         toast.show();
 
 
-        Log.w("veriCodActivo:", "codigo:" + URLVerificarCampos);
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URLVerificarCampos, null,
                 response -> {
                     try {
                         String resulJSON = response.getString("estado");
-                        Log.e("MAINACTIVITY===>", resulJSON);
                         switch (resulJSON) {
                             case "1":
                                 LayoutInflater inflater1 = getLayoutInflater();
@@ -237,7 +229,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void registrarCodigo() {
-        Log.w("MAIN registrarCodigo>", "aca");
 
         sharedPreferences.guardarCodigo("");
         sharedPreferences.guardarRegistroLic("0");
@@ -273,21 +264,18 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences.guardarRegistroLic("0");
         sharedPreferences.guardarEstadoSwitch("0");
         sharedPreferences.guardarRegistroAPP("0");
-        Log.e("MAIN=====>", sharedPreferences.getRegistroAPP());
 
         builder.setCancelable(false).setPositiveButton("OK", (dialog, which) -> {
 
             loadingScreen.show(getSupportFragmentManager(), "Espere...");
 
             String URLVerificacionCodigo2 = URLVerificacionCodigo + codigo.getText().toString().trim() + "&imei=" + imei.trim();
-            Log.w("MainActividy CODIGO==+>", URLVerificacionCodigo2);
 
             JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, URLVerificacionCodigo2, null,
                     response -> {
 
                         try {
                             String resulJSON = response.getString("estado");
-                            Log.e("MAINACTIVITY=======>", resulJSON);
                             if (resulJSON.equals("1")) {
                                 Intent i = new Intent(MainActivity.this, registroLicoreria.class);
                                 startActivity(i);
@@ -447,21 +435,18 @@ public class MainActivity extends AppCompatActivity {
     private String getBandera() {
         sharedPreferences = new sharedPreferences(getApplicationContext());
         String bandera = sharedPreferences.getRegistroAPP();
-        Log.w("MAINactivity regApp==>", bandera);
         return bandera;
     }
 
     private String getCodigo() {
         sharedPreferences = new sharedPreferences(getApplicationContext());
         String bandera = sharedPreferences.getCodigo();
-        Log.w("MAINactivity getCod==>", bandera);
         return bandera;
     }
 
     private String getRegigstroLic() {
         sharedPreferences = new sharedPreferences(getApplicationContext());
         String registroLic = sharedPreferences.getRegistroLic();
-        Log.w("MAINact getRegLic==>", registroLic);
         return registroLic;
     }
 
@@ -474,9 +459,7 @@ public class MainActivity extends AppCompatActivity {
     //permisos para versiones de android superiores a la 6
     @TargetApi(Build.VERSION_CODES.M)
     private boolean Permisos() {
-        Log.e("Permisos", "permisooooooo");
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            Log.w("retorno", "1");
             return true;
         }
 
@@ -485,7 +468,6 @@ public class MainActivity extends AppCompatActivity {
                 && (checkSelfPermission(READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
                 && (checkSelfPermission(CAMERA) == PackageManager.PERMISSION_GRANTED)
                 && (checkSelfPermission(READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED)) {
-            Log.w("retorno", "2");
 
             return true;
         }
@@ -505,14 +487,12 @@ public class MainActivity extends AppCompatActivity {
                             CAMERA,
                             READ_PHONE_STATE
                     }, 1000);
-            Log.w("retorno", "3");
         }
 
         return false;
     }
 
     private void cargarDialogo() {
-        Log.w("cargarDialogo", "cargarDialogooooooo");
 
         AlertDialog.Builder dialogo = new AlertDialog.Builder(MainActivity.this);
         dialogo.setTitle(R.string.dialogoPermisosTitulo);
@@ -558,14 +538,12 @@ public class MainActivity extends AppCompatActivity {
 
                 botones();
             } else {
-                Log.e("MainActiviti=>", "onRequestPermissionsResult");
                 solicitarPermisosManual();
             }
         }
     }
 
     private void solicitarPermisosManual() {
-        Log.e("MainActiviti=>", "solicitarPermisos Manual");
         final CharSequence[] opciones = {"si", "no"};
         final AlertDialog.Builder alertaOpciones = new AlertDialog.Builder(MainActivity.this);
         alertaOpciones.setTitle("Seleccione una opción");

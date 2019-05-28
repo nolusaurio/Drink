@@ -3,7 +3,6 @@ package www.nolusaurio.club.drinkapp;
 import android.content.Context;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +46,6 @@ public class Adaptador_registros extends RecyclerView.Adapter<Adaptador_registro
         registrosViewHolder.nombre.setText(regigstros.get(i).getNombre());
         registrosViewHolder.comentario.setText(regigstros.get(i).getComentario());
 
-        Log.w("ADAPTADOOOOOORRRRRRR", regigstros.get(i).getRespuesta());
         if (regigstros.get(i).getRespuesta().isEmpty() || regigstros.get(i).getRespuesta().equals("") ||
                 regigstros.get(i).getRespuesta().equals(null) || regigstros.get(i).getRespuesta().equals("null")) {
             registrosViewHolder.respuesta.setText("Sin respuesta");
@@ -141,12 +139,10 @@ public class Adaptador_registros extends RecyclerView.Adapter<Adaptador_registro
             String envio = URL + "/instResp.php?nombreLic=" + lico + "&respuesta=" + answer + "&nombreCli=" + nomCli +
                     "&comentario=" + com;
             envio = envio.replaceAll(" ", "%20");
-            Log.w("ENVIANDO RES:", envio);
 
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, envio, null, response -> {
                 try {
                     String resulJSON = response.getString("estado");
-                    Log.w("ENVIANDO COM JSON", resulJSON);
                     if (resulJSON.equals("1")) {
                         Toast.makeText(context, "Respuesta enviada", Toast.LENGTH_SHORT).show();
                     } else {

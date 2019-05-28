@@ -12,7 +12,6 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -113,7 +112,6 @@ public class VIstaLic extends AppCompatActivity {
 
 
             if(bytes==null){
-                Log.w("VISTALICCC!", "NULL");
                 String URL = getString(R.string.URL);
                 String URL_IMAGEN = URL+"/";
                 URL_IMAGEN = URL_IMAGEN + pp;
@@ -146,7 +144,6 @@ public class VIstaLic extends AppCompatActivity {
                 });
                 SingletonVolley.getInstanciaVolley(getApplicationContext()).addToRequestQueue(imageRequest);
             } else {
-                Log.w("VISTALICCC!", "NOT NULL");
 
                 bm = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                 im.setImageBitmap(bm);
@@ -167,8 +164,6 @@ public class VIstaLic extends AppCompatActivity {
             }
 
 
-
-            Log.w("promocion:", p);
 
             nombre.setText(nombreLicoreria);
             descripcion.setText(d);
@@ -233,7 +228,6 @@ public class VIstaLic extends AppCompatActivity {
 
         envio = envio.replaceAll(" ","%20");
 
-        Log.w("VISTALIC ENVIO COMN:", envio);
         loadingScreen.show(getSupportFragmentManager(), "Espere...");
 
 
@@ -309,7 +303,6 @@ public class VIstaLic extends AppCompatActivity {
 
 
     private void dibujarRuta(String latt, String longg) {
-        Log.w("LAT y LONG:", latt + "," + longg);
     }
 
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -462,7 +455,6 @@ public class VIstaLic extends AppCompatActivity {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, envio, null, response -> {
             try {
                 if(response.getString("estado").equals("1")){
-                    Log.w("VISTALIC cargarCom", "Qui");
 
                     JSONArray cadenas = response.getJSONArray("mensaje");
                     for(int i=0;i<cadenas.length();i++){

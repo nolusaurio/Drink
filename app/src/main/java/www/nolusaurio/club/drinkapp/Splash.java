@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.TextView;
@@ -31,8 +30,6 @@ public class Splash extends AppCompatActivity {
         animation.setRepeatMode(Animation.REVERSE);
         animation.setRepeatCount(Animation.INFINITE);
         inicio.startAnimation(animation);
-
-        Log.e("SPLASH", "oncreate");
 
 
         new Handler().postDelayed(new Runnable() {

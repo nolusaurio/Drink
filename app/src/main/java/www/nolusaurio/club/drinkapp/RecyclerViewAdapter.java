@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +31,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
     public RecyclerViewAdapter(Context context, List<Licorerias> mData) {
-        Log.e(TAG, "aca");
         this.context = context;
         this.mData = mData;
     }
@@ -63,7 +61,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         String state = "";
 
         myViewHolder.tv_licoreria_title.setText(mData.get(i).getNombreLico());
-        Log.w(TAG, "Obteniendo valores sufigo i"+(i));
 
         nombre = mData.get(i).getNombreLico();
         descripcion = mData.get(i).getDescripcionLico();
@@ -75,8 +72,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         final ByteArrayOutputStream bs = new ByteArrayOutputStream();
 
-        Log.w(TAG, "Obteniendo valores");
-        Log.w(TAG, nombre + "," + descripcion + "," + ubicacion + "," + promocion + "," + ubiGPS);
+
         final Intent ii = new Intent(context, VIstaLic.class);
         ii.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         ii.putExtra("nombre", nombre);
@@ -88,9 +84,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         ii.putExtra("estado", state);
         ii.putExtra("posicion",mData.get(i).getRuta());
 
-        Log.e("RECYCLERVIEW=======>", promocion);
         URL_IMAGEN = URL_IMAGEN + mData.get(i).getRuta();
-        Log.w(TAG, "IMAGEN:"+mData.get(i).getRuta());
 
         URL_IMAGEN = URL_IMAGEN.replace(" ", "%20").trim();
         ImageRequest imageRequest = new ImageRequest(URL_IMAGEN, new Response.Listener<Bitmap>() {
@@ -117,7 +111,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         myViewHolder.cardView.setOnClickListener(v -> {
 
-            Log.e(TAG, "onclick");
             context.startActivity(ii);
         });
 

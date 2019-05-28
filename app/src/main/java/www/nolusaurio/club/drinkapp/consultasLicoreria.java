@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -65,7 +64,6 @@ public class consultasLicoreria extends AppCompatActivity {
         String URL = getString(R.string.URL);
         String url = URL + "/getCom.php?nombreLic=" + nombreLico;
 
-        Log.w("CONSULTALICOS COMEN:", url);
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         loadingScreen.show(getSupportFragmentManager(), "Espere...");
@@ -75,7 +73,6 @@ public class consultasLicoreria extends AppCompatActivity {
                 response -> {
                     try {
                         String resultJSON = response.getString("estado");
-                        Log.w("CONSULTAS RESULJO", resultJSON);
                         if (resultJSON.equals("1")) {
                             JSONArray registrosJSON = response.getJSONArray("mensaje");
 
@@ -117,7 +114,6 @@ public class consultasLicoreria extends AppCompatActivity {
 
                 },
                 error -> {
-                    Log.e("ERROR=====>", error.toString());
                     loadingScreen.dismiss();
 
                 });

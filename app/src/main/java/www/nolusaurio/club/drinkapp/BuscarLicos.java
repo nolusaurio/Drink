@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -74,7 +73,6 @@ public class BuscarLicos extends AppCompatActivity {
 
         String URL = getString(R.string.URL);
         String URL_GET = URL + "/getLicorerias.php?estado=1";
-        Log.e(TAG, "cargarLicos");
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_GET, response -> {
             listLicos = new ArrayList<Licorerias>();
             try {

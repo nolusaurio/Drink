@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -91,7 +90,6 @@ public class tipoBusqueda extends AppCompatActivity {
 
             String URL = getString(R.string.URL);
             String direccion = URL + "/buscarLugarLico.php?palabra=" + zona;
-            Log.e("TIPOBUSQUEDA:", direccion);
             final String BACKURL = direccion;
 
             StringRequest stringRequest = new StringRequest(Request.Method.GET, direccion, response -> {

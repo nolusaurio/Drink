@@ -22,7 +22,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -214,13 +213,11 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
             loadingScreen.show(getSupportFragmentManager(), "Espere...");
             String actualizar = URL_GET + update.getText().toString().trim() + "&codigo=" + cod;
             actualizar = actualizar.replaceAll(" ", "%20");
-            Log.w("MainActividy CODIGO==+>", actualizar);
 
             JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, actualizar, null,
                     response -> {
                         try {
                             String resulJSON = response.getString("estado");
-                            Log.w("RESULTJOSN=>", resulJSON);
                             if (resulJSON.equals("1")) {
                                 LayoutInflater inflater = getLayoutInflater();
                                 View layout = inflater.inflate(R.layout.custom_toast_success,
@@ -252,7 +249,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                             loadingScreen.dismiss();
 
                         } catch (JSONException e) {
-                            Log.e("AQUI", "AQUI");
                             e.printStackTrace();
                             loadingScreen.dismiss();
 
@@ -260,7 +256,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                     },
                     error -> {
                         progressDialog.hide();
-                        Log.w("panPrincipal getEs=>", error);
                     }
             );
             SingletonVolley.getInstanciaVolley(getApplicationContext()).addToRequestQueue(getRequest);
@@ -291,13 +286,11 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
             loadingScreen.show(getSupportFragmentManager(), "Espere...");
             String actualizar = URL_GET + actnombre.getText().toString().trim() + "&codigo=" + cod;
             actualizar = actualizar.replaceAll(" ", "%20");
-            Log.w("MainActividy CODIGO==+>", actualizar);
 
             JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, actualizar, null,
                     response -> {
                         try {
                             String resulJSON = response.getString("estado");
-                            Log.w("RESULTJOSN=>", resulJSON);
                             if (resulJSON.equals("1")) {
 
                                 LayoutInflater inflater = getLayoutInflater();
@@ -328,7 +321,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                             loadingScreen.dismiss();
 
                         } catch (JSONException e) {
-                            Log.e("AQUI", "AQUI");
                             e.printStackTrace();
                             loadingScreen.dismiss();
 
@@ -336,7 +328,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                     },
                     error -> {
                         progressDialog.hide();
-                        Log.w("panPrincipal getEs=>", error);
                     }
             );
             SingletonVolley.getInstanciaVolley(getApplicationContext()).addToRequestQueue(getRequest);
@@ -367,13 +358,11 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
             String actualizar = URL_GET + update.getText().toString().trim() + "&codigo=" + cod;
             actualizar = actualizar.replaceAll(" ", "%20");
 
-            Log.w("MainActividy CODIGO==+>", actualizar);
 
             JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, actualizar, null,
                     response -> {
                         try {
                             String resulJSON = response.getString("estado");
-                            Log.w("RESULTJOSN=>", resulJSON);
                             if (resulJSON.equals("1")) {
                                 LayoutInflater inflater = getLayoutInflater();
                                 View layout = inflater.inflate(R.layout.custom_toast_descripcion,
@@ -406,7 +395,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                             loadingScreen.dismiss();
 
                         } catch (JSONException e) {
-                            Log.e("AQUI", "AQUI");
                             e.printStackTrace();
                             loadingScreen.dismiss();
 
@@ -414,7 +402,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                     },
                     error -> {
                         progressDialog.hide();
-                        Log.w("panPrincipal getEs=>", error);
                     }
             );
             SingletonVolley.getInstanciaVolley(getApplicationContext()).addToRequestQueue(getRequest);
@@ -445,13 +432,11 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
             String actualizar = URL_GET + update.getText().toString().trim() + "&codigo=" + cod;
             actualizar = actualizar.replaceAll(" ", "%20");
 
-            Log.w("MainActividy CODIGO==+>", actualizar);
 
             JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, actualizar, null,
                     response -> {
                         try {
                             String resulJSON = response.getString("estado");
-                            Log.w("RESULTJOSN=>", resulJSON);
                             if (resulJSON.equals("1")) {
                                 LayoutInflater inflater = getLayoutInflater();
                                 View layout = inflater.inflate(R.layout.custom_toast_ubicacion,
@@ -481,7 +466,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                             loadingScreen.dismiss();
 
                         } catch (JSONException e) {
-                            Log.e("AQUI", "AQUI");
                             e.printStackTrace();
                             loadingScreen.dismiss();
 
@@ -489,7 +473,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                     },
                     error -> {
                         progressDialog.hide();
-                        Log.w("panPrincipal getEs=>", error);
                     }
             );
             SingletonVolley.getInstanciaVolley(getApplicationContext()).addToRequestQueue(getRequest);
@@ -529,18 +512,15 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                     public void onLocationResult(LocationResult locationResult) {
                         super.onLocationResult(locationResult);
                         String direccion = (locationResult.getLastLocation().getLatitude() + "," + locationResult.getLastLocation().getLongitude());
-                        Log.e("pantallaActGPS:", direccion);
                         client.removeLocationUpdates(this);
 
                         final String actualizar = URL_GET + direccion.trim() + "&codigo=" + cod;
 
-                        Log.e("pantallaActGPSDir:", actualizar);
 
                         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, actualizar, null,
                                 response -> {
                                     try {
                                         String resulJSON = response.getString("estado");
-                                        Log.w("RESULTJOSN=>", resulJSON);
                                         if (resulJSON.equals("1")) {
                                             LayoutInflater inflater = getLayoutInflater();
                                             View layout = inflater.inflate(R.layout.custom_toast_ubicaciongps,
@@ -570,7 +550,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                                         loadingScreen.dismiss();
 
                                     } catch (JSONException e) {
-                                        Log.e("AQUI", "AQUI");
                                         e.printStackTrace();
                                         loadingScreen.dismiss();
 
@@ -578,7 +557,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                                 },
                                 error -> {
                                     progressDialog.hide();
-                                    Log.w("panPrincipal getEs=>", error);
                                 }
                         );
                         SingletonVolley.getInstanciaVolley(getApplicationContext()).addToRequestQueue(getRequest);
@@ -609,13 +587,11 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
         String actualizar = URL_GET + pro.toString().trim() + "&codigo=" + cod;
         actualizar = actualizar.replaceAll(" ", "%20");
 
-        Log.w("MainActividy CODIGO==+>", actualizar);
 
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, actualizar, null,
                 response -> {
                     try {
                         String resulJSON = response.getString("estado");
-                        Log.w("RESULTJOSN=>", resulJSON);
                         if (resulJSON.equals("1")) {
                             LayoutInflater inflater = getLayoutInflater();
                             View layout = inflater.inflate(R.layout.custom_toast_success,
@@ -645,7 +621,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                         loadingScreen.dismiss();
 
                     } catch (JSONException e) {
-                        Log.e("AQUI", "AQUI");
                         e.printStackTrace();
                         loadingScreen.dismiss();
 
@@ -653,7 +628,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                 },
                 error -> {
                     progressDialog.hide();
-                    Log.w("panPrincipal getEs=>", error);
                 }
         );
         SingletonVolley.getInstanciaVolley(getApplicationContext()).addToRequestQueue(getRequest);
@@ -700,10 +674,8 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                 jsonObject.put("imagen", img + "\"\\}");
 
                 final String requestBody = jsonObject.toString();
-                Log.w("String===>", requestBody.toString().trim());
 
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
-                    Log.e("Respuesta===>", response.toString());
                     if (response.equals("200")) {
                         fotografia.setImageBitmap(bitmap);
                         LayoutInflater inflater = getLayoutInflater();
@@ -804,14 +776,12 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
         final String BACKURL = URL_GET;
         URL_GET = URL_GET + cod;
 
-        Log.w("pan prin lic=>", URL_GET);
 
 
         final JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, URL_GET, null,
                 response -> {
                     try {
                         String resulJSON = response.getString("estado");
-                        Log.w("RESULTJOSN=>", resulJSON);
                         if (resulJSON.equals("1")) {
 
                             JSONObject object = response.getJSONObject("mensaje");
@@ -839,14 +809,12 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                             toast.show();
                         }
                     } catch (JSONException e) {
-                        Log.e("AQUI", "AQUI");
                         e.printStackTrace();
                     }
                 },
                 error -> {
                     progressDialog.hide();
-                    Log.w("panPrincipal getEs=>", error.getMessage());
-                    Log.e("panPrincipal getEs=>", error.getCause().toString());
+
 
                 }
         );
@@ -864,14 +832,10 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
             jsonObject.put("est4d0", arg);
 
             final String requestBody = jsonObject.toString();
-            Log.w("String===>", requestBody.toString().trim());
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ACTUALIZAR, response -> {
-                Log.e("Respuesta===>", response.toString());
                 if (response.equals("200")) {
-                    Log.w("panPrin respu swit", response);
                 } else {
-                    Log.w("panPrin respu swit no", response);
                 }
 
             }, error -> {
@@ -924,21 +888,18 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
 
 
     private void obtenerDatos() {
-        Log.e("pan prin licO=>", "obtenerDatos");
         String URL = getString(R.string.URL);
         String URL_GET = URL + "/getData.php?codigo=";
         String URL_IMAGEN = URL + "/";
 
         final String BACKURL = URL_GET;
         URL_GET = URL_GET + cod;
-        Log.e("pan prinlicURLLL=>", URL_GET);
 
 
         final JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, URL_GET, null,
                 response -> {
                     try {
                         if (response.getString("estado").equals("1")) {
-                            Log.e("TAG", "aqui");
 
                             JSONObject resulJSON = response.getJSONObject("mensaje");
                             String nom = resulJSON.getString("n0mbr3L1c");
@@ -949,7 +910,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                             String ubi = resulJSON.getString("ub1c4c10n");
                             String ubiGPS = resulJSON.getString("ub1c4c10nGPS");
                             String pro = resulJSON.getString("pr0m0c10n");
-                            Log.w("PANTALLA PRO", pro);
                             String URL_IMAGEN2 = URL_IMAGEN + ruta;
                             cargarWebServiceImagen(URL_IMAGEN2);
                             nombreLicoreria.setText(nom);
@@ -966,7 +926,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        Log.e("TAG", "aqui");
                     }
                     progressDialog.hide();
 
@@ -974,7 +933,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                 },
                 error -> {
                     progressDialog.hide();
-                    Log.w("panPrincipal=>", error);
                 }
         );
         SingletonVolley.getInstanciaVolley(getApplicationContext()).addToRequestQueue(getRequest);
@@ -983,7 +941,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
 
 
     private void cargarWebServiceImagen(String url) {
-        Log.w("pantalla principal=>", "cargarWebServiceImage");
         url = url.replace(" ", "%20");
         ImageRequest imageRequest = new ImageRequest(url, response -> fotografia.setImageBitmap(response), 0, 0, ImageView.ScaleType.CENTER_INSIDE, null, error -> Toast.makeText(getApplicationContext(), "ERROR AL CARGAR", Toast.LENGTH_SHORT).show());
 
@@ -1001,7 +958,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
     private String getCodigo() {
         sharedPreferences = new sharedPreferences(getApplicationContext());
         String bandera = sharedPreferences.getCodigo();
-        Log.w("MAINactivity getCod==>", bandera);
         return bandera;
     }
 
@@ -1013,7 +969,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
     private String getEstSwitch() {
         sharedPreferences = new sharedPreferences(getApplicationContext());
         String bandera = sharedPreferences.getEstadoSwitch();
-        Log.w("pan prin lic getSwit==>", bandera);
         return bandera;
     }
 
@@ -1204,17 +1159,14 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
 
     private void camara() {
 
-        Log.w("CAMARA=======>", "aqui");
         File miFile = new File(Environment.getExternalStorageDirectory(), DIRECTORIO_IMAGEN);
         boolean isCreated = miFile.exists();
 
         if (isCreated == false) {
-            Log.w("CAMARA=======>", "false");
             isCreated = miFile.mkdirs();
         }
 
         if (isCreated == true) {
-            Log.w("CAMARA=======>", "true");
             Long consecutivo = System.currentTimeMillis() / 1000;
             String nombre = consecutivo.toString() + ".jpg";
             path = Environment.getExternalStorageDirectory() + File.separator + DIRECTORIO_IMAGEN
@@ -1251,9 +1203,10 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
             } else {
                 if (resultCode == RESULT_OK) {
 
-                    Log.w("CARG 0====>", "foto");
                     MediaScannerConnection.scanFile(this, new String[]{path}, null,
-                            (path, uri) -> Log.i("PATH", "" + path));
+                            (path, uri) -> {
+
+                            });
                     bitmap = BitmapFactory.decodeFile(path);
                     fotografia.setImageBitmap(bitmap);
                 }
@@ -1262,9 +1215,9 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
 
         switch (requestCode) {
             case COD_FOTO:
-                Log.w("CARG====>", "foto");
                 MediaScannerConnection.scanFile(this, new String[]{path}, null,
-                        (path, uri) -> Log.i("PATH", "" + path));
+                        (path, uri) -> {
+                        });
                 bitmap = BitmapFactory.decodeFile(path);
                 fotografia.setImageBitmap(bitmap);
                 break;
