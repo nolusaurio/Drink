@@ -2,7 +2,6 @@ package www.nolusaurio.club.drinkapp;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -116,7 +115,7 @@ public class VIstaLic extends AppCompatActivity {
             if(bytes==null){
                 Log.w("VISTALICCC!", "NULL");
                 String URL = getString(R.string.URL);
-                String URL_IMAGEN = URL+"/drinkapp/";
+                String URL_IMAGEN = URL+"/";
                 URL_IMAGEN = URL_IMAGEN + pp;
 
                 ImageRequest imageRequest = new ImageRequest(URL_IMAGEN, new Response.Listener<Bitmap>() {
@@ -174,7 +173,11 @@ public class VIstaLic extends AppCompatActivity {
             nombre.setText(nombreLicoreria);
             descripcion.setText(d);
             ubicacion.setText(u);
-            promo.setText(p);
+            if(p.isEmpty() || p.equals("") || p.equals(null) || p.equals("null")){
+                promo.setText("Sin promociones");
+            } else {
+                promo.setText(p);
+            }
             tel.setText(t + "");
 
 
@@ -223,11 +226,12 @@ public class VIstaLic extends AppCompatActivity {
         String envio = "";
         if(nombreLicoreria.equals(null)||nombreLicoreria.equals("")){
             String temporal = nombre.getText().toString().trim();
-            envio = URL + "/drinkapp/insComent.php?nombreLic="+temporal+"&nombreCons="+nom+"&consCons="+com;
+            envio = URL + "/insComent.php?nombreLic="+temporal+"&nombreCons="+nom+"&consCons="+com;
         } else {
-            envio = URL + "/drinkapp/insComent.php?nombreLic="+nombreLicoreria+"&nombreCons="+nom+"&consCons="+com;
+            envio = URL + "/insComent.php?nombreLic="+nombreLicoreria+"&nombreCons="+nom+"&consCons="+com;
         }
 
+        envio = envio.replaceAll(" ","%20");
 
         Log.w("VISTALIC ENVIO COMN:", envio);
         loadingScreen.show(getSupportFragmentManager(), "Espere...");
@@ -452,7 +456,7 @@ public class VIstaLic extends AppCompatActivity {
         }
 
         String URL = getString(R.string.URL);
-        String envio = URL + "/drinkapp/getCom.php?nombreLic="+name;
+        String envio = URL + "/getCom.php?nombreLic="+name;
         loadingScreen.show(getSupportFragmentManager(), "Espere...");
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, envio, null, response -> {

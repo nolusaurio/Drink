@@ -90,7 +90,7 @@ public class tipoBusqueda extends AppCompatActivity {
         if(!zona.equals("")) {
 
             String URL = getString(R.string.URL);
-            String direccion = URL + "/drinkapp/buscarLugarLico.php?palabra=" + zona;
+            String direccion = URL + "/buscarLugarLico.php?palabra=" + zona;
             Log.e("TIPOBUSQUEDA:", direccion);
             final String BACKURL = direccion;
 

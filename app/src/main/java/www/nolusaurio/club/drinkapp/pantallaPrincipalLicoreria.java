@@ -118,7 +118,7 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
         actUbicacion = (Button) findViewById(R.id.actualizarUbicacion);
         actUbicacionGPS = (Button) findViewById(R.id.actualizarGps);
         actTele = (Button) findViewById(R.id.actualizarTelefono);
-        consultas = (Button)findViewById(R.id.revisarConsultar);
+        consultas = (Button) findViewById(R.id.revisarConsultar);
 
 
         URL = getString(R.string.URL);
@@ -199,7 +199,7 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
     //********************************************************
     private void actualizarTelefono(String cod) {
         String URL = getString(R.string.URL);
-        String URL_GET = URL + "/drinkapp/actualizarTeleph.php?teleph=";
+        String URL_GET = URL + "/actualizarTeleph.php?teleph=";
         final String BACKURL = URL_GET;
 
         LayoutInflater layoutInflater = LayoutInflater.from(pantallaPrincipalLicoreria.this);
@@ -275,7 +275,7 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
 
     private void actualizarNombre(String cod) {
         String URL = getString(R.string.URL);
-        String URL_GET = URL + "/drinkapp/actualizarNombre.php?nombre=";
+        String URL_GET = URL + "/actualizarNombre.php?nombre=";
         final String BACKURL = URL_GET;
 
 
@@ -351,7 +351,7 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
 
     private void actualizarDescripcion(String cod) {
         String URL = getString(R.string.URL);
-        String URL_GET = URL + "/drinkapp/actualizarDescripcion.php?descripcion=";
+        String URL_GET = URL + "/actualizarDescripcion.php?descripcion=";
         final String BACKURL = URL_GET;
 
         LayoutInflater layoutInflater = LayoutInflater.from(pantallaPrincipalLicoreria.this);
@@ -429,7 +429,7 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
 
     private void actualizarUbicacion(String cod) {
         String URL = getString(R.string.URL);
-        String URL_GET = URL + "/drinkapp/actualizarUbicacion.php?ubicacion=";
+        String URL_GET = URL + "/actualizarUbicacion.php?ubicacion=";
         final String BACKURL = URL_GET;
 
         LayoutInflater layoutInflater = LayoutInflater.from(pantallaPrincipalLicoreria.this);
@@ -505,7 +505,7 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
     @SuppressLint("MissingPermission")
     private void actualizarUbicacionGPS(String cod) {
         String URL = getString(R.string.URL);
-        String URL_GET = URL + "/drinkapp/actualizarUbicacionGPS.php?ubicaciongps=";
+        String URL_GET = URL + "/actualizarUbicacionGPS.php?ubicaciongps=";
         final String BACKURL = URL_GET;
 
         LayoutInflater layoutInflater = LayoutInflater.from(pantallaPrincipalLicoreria.this);
@@ -601,9 +601,8 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
 
     private void actualizarPromocion(String pro, String cod) {
         String URL = getString(R.string.URL);
-        String URL_GET = URL + "/drinkapp/actualizarPromocion.php?promocion=";
+        String URL_GET = URL + "/actualizarPromocion.php?promocion=";
         final String BACKURL = URL_GET;
-
 
 
         loadingScreen.show(getSupportFragmentManager(), "Espere...");
@@ -686,7 +685,7 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
 
     private void registrarFoto(String nombre, String cod) {
         String URL = getString(R.string.URL);
-        String url = URL + "/drinkapp/actualizarFoto.php";
+        String url = URL + "/actualizarFoto.php";
 
         if (bandera == 1) {
 
@@ -801,7 +800,7 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
     //********************************************************
     private void obtenerEstado(String cod) {
         String URL = getString(R.string.URL);
-        String URL_GET = URL + "/drinkapp/getData.php?codigo=";
+        String URL_GET = URL + "/getData.php?codigo=";
         final String BACKURL = URL_GET;
         URL_GET = URL_GET + cod;
 
@@ -858,7 +857,7 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
 
     private void datosWeb(String arg, String cod) {
         String URL = getString(R.string.URL);
-        String URL_ACTUALIZAR = URL + "/drinkapp/actualizarRegsitro.php";
+        String URL_ACTUALIZAR = URL + "/actualizarRegsitro.php";
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("c0dig0r3g1str0", cod);
@@ -927,8 +926,8 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
     private void obtenerDatos() {
         Log.e("pan prin licO=>", "obtenerDatos");
         String URL = getString(R.string.URL);
-        String URL_GET = URL + "/drinkapp/getData.php?codigo=";
-        String URL_IMAGEN = URL + "/drinkapp/";
+        String URL_GET = URL + "/getData.php?codigo=";
+        String URL_IMAGEN = URL + "/";
 
         final String BACKURL = URL_GET;
         URL_GET = URL_GET + cod;
@@ -950,13 +949,18 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                             String ubi = resulJSON.getString("ub1c4c10n");
                             String ubiGPS = resulJSON.getString("ub1c4c10nGPS");
                             String pro = resulJSON.getString("pr0m0c10n");
+                            Log.w("PANTALLA PRO", pro);
                             String URL_IMAGEN2 = URL_IMAGEN + ruta;
                             cargarWebServiceImagen(URL_IMAGEN2);
                             nombreLicoreria.setText(nom);
                             descripcionLicoreria.setText(des);
                             ubii.setText(ubi);
                             ubiiGPS.setText(ubiGPS);
-                            promo.setText(pro);
+                            if (pro.isEmpty() || pro.equals("") || pro.equals(null) || pro.equals("null")) {
+                                promo.setText("Sin promociones");
+                            } else {
+                                promo.setText(pro);
+                            }
                             telephone.setText(tell + "");
 
                         }
@@ -1024,11 +1028,11 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
         Dialog dialog = new Dialog(pantallaPrincipalLicoreria.this);
         dialog.setContentView(R.layout.custom_menu);
         Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
-        TextView texto = (TextView)dialog.findViewById(R.id.aviso);
+        TextView texto = (TextView) dialog.findViewById(R.id.aviso);
         int id = item.getItemId();
 
 
-        switch (id){
+        switch (id) {
             case R.id.itemuno:
                 dialog.setTitle(R.string.orientacionFoto);
                 texto.setText(R.string.problemas_camara);

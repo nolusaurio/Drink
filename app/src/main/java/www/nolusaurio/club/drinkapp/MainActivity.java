@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         String URL = getApplication().getString(R.string.URL);
-        String URLVerificarCampos = URL + "/drinkapp/comCampos.php?codigo=";
+        String URLVerificarCampos = URL + "/comCampos.php?codigo=";
         String BACKURL = URLVerificarCampos;
         URLVerificarCampos = URLVerificarCampos + cod + "&imei=" + imei + "&estado=" + bandera;
 
@@ -245,7 +245,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         String URL = getApplication().getString(R.string.URL);
-        String URLVerificacionCodigo = URL + "/drinkapp/verificarCodigo2.php?codigo=";
+        String URLVerificacionCodigo = URL + "/verificarCodigo2.php?codigo=";
         final String BACKURL = URLVerificacionCodigo;
 
 

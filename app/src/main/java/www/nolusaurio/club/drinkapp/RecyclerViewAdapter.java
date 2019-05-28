@@ -51,7 +51,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
         String URL = context.getString(R.string.URL);
-        String URL_IMAGEN = URL+"/drinkapp/";
+        String URL_IMAGEN = URL+"/";
 
         String BACK_URL = URL_IMAGEN;
         String nombre = "";

@@ -215,14 +215,14 @@ public class registroLicoreria extends AppCompatActivity {
 
     private void registrarLicoreria() {
         String URL = getString(R.string.URL);
-        String url = URL + "/drinkapp/insertarRegistro.php";
+        String url = URL + "/insertarRegistro.php";
 
         loadingScreen.show(getSupportFragmentManager(), "Espere...");
 
         bitmap = redimensionarImagen(bitmap, 500, 500);
         String img = convertirImgString(bitmap);
 
-        String verificacion = URL + "/drinkapp/verificarNombre.php?nombre=";
+        String verificacion = URL + "/verificarNombre.php?nombre=";
         String verificarNombreDoble = verificacion + nombreLic.getText().toString().trim();
         Log.w("REGISTROLICORERIA:", verificarNombreDoble);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, verificarNombreDoble, null, response -> {

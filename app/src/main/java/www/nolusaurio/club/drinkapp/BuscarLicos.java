@@ -73,7 +73,7 @@ public class BuscarLicos extends AppCompatActivity {
         loadingScreen.show(getSupportFragmentManager(), "Espere...");
 
         String URL = getString(R.string.URL);
-        String URL_GET = URL + "/drinkapp/getLicorerias.php?estado=1";
+        String URL_GET = URL + "/getLicorerias.php?estado=1";
         Log.e(TAG, "cargarLicos");
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_GET, response -> {
             listLicos = new ArrayList<Licorerias>();

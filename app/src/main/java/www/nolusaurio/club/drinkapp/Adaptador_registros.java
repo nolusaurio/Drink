@@ -46,7 +46,14 @@ public class Adaptador_registros extends RecyclerView.Adapter<Adaptador_registro
     public void onBindViewHolder(final registrosViewHolder registrosViewHolder, int i) {
         registrosViewHolder.nombre.setText(regigstros.get(i).getNombre());
         registrosViewHolder.comentario.setText(regigstros.get(i).getComentario());
-        registrosViewHolder.respuesta.setText(regigstros.get(i).getRespuesta());
+
+        Log.w("ADAPTADOOOOOORRRRRRR", regigstros.get(i).getRespuesta());
+        if (regigstros.get(i).getRespuesta().isEmpty() || regigstros.get(i).getRespuesta().equals("") ||
+                regigstros.get(i).getRespuesta().equals(null) || regigstros.get(i).getRespuesta().equals("null")) {
+            registrosViewHolder.respuesta.setText("Sin respuesta");
+        } else {
+            registrosViewHolder.respuesta.setText(regigstros.get(i).getRespuesta());
+        }
         registrosViewHolder.lico.setText(regigstros.get(i).getLico());
 
     }
@@ -55,8 +62,6 @@ public class Adaptador_registros extends RecyclerView.Adapter<Adaptador_registro
     public int getItemCount() {
         return regigstros.size();
     }
-
-
 
 
     @Override
@@ -75,7 +80,7 @@ public class Adaptador_registros extends RecyclerView.Adapter<Adaptador_registro
             nombre = (TextView) itemView.findViewById(R.id.consulta_nombre);
             comentario = (TextView) itemView.findViewById(R.id.consulta_consulta);
             respuesta = (TextView) itemView.findViewById(R.id.consulta_respuesta);
-            lico = (TextView)itemView.findViewById(R.id.idLico);
+            lico = (TextView) itemView.findViewById(R.id.idLico);
             responder = (Button) itemView.findViewById(R.id.btn_responder);
 
             responder.setOnClickListener(v -> {
@@ -91,6 +96,8 @@ public class Adaptador_registros extends RecyclerView.Adapter<Adaptador_registro
 
                             String answer = moderar(respuesta.getText().toString().trim());
 
+                            if (answer.isEmpty() || answer.equals("") || answer.equals(null) || answer.equals("null"))
+                                answer = "Sin respuesta";
 
                             aniadirComentario(nombre.getText().toString().trim(),
                                     answer,
@@ -126,13 +133,13 @@ public class Adaptador_registros extends RecyclerView.Adapter<Adaptador_registro
         }
 
 
-        private void aniadirComentario(String nomCli, String answer, String lico, String com){
+        private void aniadirComentario(String nomCli, String answer, String lico, String com) {
             respuesta.setText(answer);
 
 
             String URL = context.getString(R.string.URL);
-            String envio = URL+"/drinkapp/instResp.php?nombreLic="+lico+"&respuesta="+answer+"&nombreCli="+nomCli+
-                    "&comentario="+com;
+            String envio = URL + "/instResp.php?nombreLic=" + lico + "&respuesta=" + answer + "&nombreCli=" + nomCli +
+                    "&comentario=" + com;
             envio = envio.replaceAll(" ", "%20");
             Log.w("ENVIANDO RES:", envio);
 
@@ -140,7 +147,7 @@ public class Adaptador_registros extends RecyclerView.Adapter<Adaptador_registro
                 try {
                     String resulJSON = response.getString("estado");
                     Log.w("ENVIANDO COM JSON", resulJSON);
-                    if(resulJSON.equals("1")){
+                    if (resulJSON.equals("1")) {
                         Toast.makeText(context, "Respuesta enviada", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(context, "Vuelva a intentar", Toast.LENGTH_SHORT).show();
@@ -159,8 +166,6 @@ public class Adaptador_registros extends RecyclerView.Adapter<Adaptador_registro
 
 
         }
-
-
 
 
     }

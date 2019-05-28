@@ -54,7 +54,7 @@
     <string name="token">pk.eyJ1Ijoibm9sdXMiLCJhIjoiY2p0cnAwa3p3MHNjaTRkcXM3Nms3bG9hbSJ9.QvlF7BWVem6PgrIHrja_wA</string>
     <string name="animation_string">hello</string>
     <string name="noExistenLicores">Ninguna licoreria abierta</string>
-    <string name="tituloLicoresDisponibles"><i>Lista de licorerias abiertas en este momento</i></string>
+    <string name="tituloLicoresDisponibles"><i>Lista de licorerias registradas</i></string>
     <string name="textSwitch"><b>Abierto?</b></string>
     <string name="zonaBusqueda">Ingrese la zona de búsqueda</string>
     <string name="todosLicores">Lista de licorerias</string>
@@ -87,7 +87,7 @@
     <string name="splashInicio"><b><i>Iniciando</i></b></string>
 
 
-    <string name="URL">https://www.nolusaurio.club</string>
+    <string name="URL">http://50.116.40.209</string>
     <string name="digitos">abcdefghijklmnopqrstuvwxy,z ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
     <string name="digitos2">abcdefghijklmnñopqrstuvwxy,z ABCDEFGHIJKLMNÑOPQRSTUVWXYZ.0123456789 #</string>
 
@@ -131,9 +131,9 @@
     <string name="conRes"><u>Respuesta:</u></string>
 
     <string name="responderBoton">Responder</string>
-    <string name="consultaNombre"><u>Nombre:</u></string>
-    <string name="consultaConsulta"><u>Consulta:</u></string>
-    <string name="responderConsulta"><u>Respuesta:</u></string>
+    <string name="consultaNombre"><u><b>Nombre:</b></u></string>
+    <string name="consultaConsulta"><u><b>Consulta:</b></u></string>
+    <string name="responderConsulta"><u><b>Respuesta:</b></u></string>
     <string name="layoutRespuesta">Escribe la respuesta:</string>
     <string name="layoutRespuestaHint">Respuesta</string>
     <string name="mensajeSinComentarios">No tiene consultas pendientes</string>
