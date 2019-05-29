@@ -361,6 +361,8 @@ public class registroLicoreria extends AppCompatActivity {
             toast.setDuration(Toast.LENGTH_SHORT);
             toast.setView(layout);
             toast.show();
+            loadingScreen.dismiss();
+
         }
 
 
@@ -434,8 +436,6 @@ public class registroLicoreria extends AppCompatActivity {
 
 
         if (data != null) {
-
-
             if (requestCode == 100) {
                 Uri path = data.getData();
 
