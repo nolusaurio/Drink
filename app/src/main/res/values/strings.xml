@@ -62,7 +62,7 @@
     <string name="noexisteZona">Ninguna licoreria</string>
     <string name="ingresePalabra">Ingrese la zona a buscar</string>
     <string name="txtv_soloPalabra">Ingrese sólo el nombre de la zona</string>
-    <string name="telefonoLico">Contacto:</string>
+    <string name="telefonoLico"><u>Contacto:</u></string>
 
     <string name="actualizar">Actualizar</string>
     <string name="actualizacionNombre">Actualización de nombre correcto</string>
@@ -137,5 +137,7 @@
     <string name="layoutRespuesta">Escribe la respuesta:</string>
     <string name="layoutRespuestaHint">Respuesta</string>
     <string name="mensajeSinComentarios">No tiene consultas pendientes</string>
+    <string name="promocionLicoreria">Ingrese la promocion del día</string>
+    <string name="visitasLicoreria"><u>Visitas recibidas:</u></string>
 
 </resources>

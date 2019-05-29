@@ -1,5 +1,6 @@
 package www.nolusaurio.club.drinkapp;
 
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -71,7 +72,7 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
     private String URL = "";
     String nombreLicoreriaComentarios = "";
 
-    private TextView nombreLicoreria, descripcionLicoreria, ubii, ubiiGPS, estSw, telephone;
+    private TextView nombreLicoreria, descripcionLicoreria, ubii, ubiiGPS, estSw, telephone, cDiario, cSemanal;
     private EditText promo;
     private ImageView fotografia;
     private Switch est;
@@ -109,7 +110,8 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
         est = (Switch) findViewById(R.id.estado);
         actPromo = (Button) findViewById(R.id.guardarPromo);
         estSw = (TextView) findViewById(R.id.estadoswitch);
-
+        cDiario = (TextView) findViewById(R.id.conteoDiario);
+        cSemanal = (TextView) findViewById(R.id.conteoSemanal);
         actFoto = (Button) findViewById(R.id.actualizarFoto);
         guardarFoto = (Button) findViewById(R.id.registrarFoto);
         actNombre = (Button) findViewById(R.id.actualizarNombre);
@@ -122,7 +124,7 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
 
         URL = getString(R.string.URL);
 
-        obtenerEstado(cod); //estado del switch
+        obtenerEstado(cod);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -189,6 +191,27 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
 
     }
 
+
+    private void startCountAnimation() {
+        ValueAnimator animator = ValueAnimator.ofInt(0, 600); //0 is min number, 600 is max number
+        ValueAnimator animator2 = ValueAnimator.ofInt(0, 350); //0 is min number, 600 is max number
+
+        animator.setDuration(5000); //Duration is in milliseconds
+        animator2.setDuration(5000);
+
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            public void onAnimationUpdate(ValueAnimator animation) {
+                cDiario.setText(animation.getAnimatedValue().toString());
+            }
+        });
+        animator2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            public void onAnimationUpdate(ValueAnimator animation) {
+                cSemanal.setText(animation.getAnimatedValue().toString());
+            }
+        });
+        animator.start();
+        animator2.start();
+    }
 
     //********************************************************
     //********************************************************
@@ -929,6 +952,7 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                             descripcionLicoreria.setText(des);
                             ubii.setText(ubi);
                             ubiiGPS.setText(ubiGPS);
+                            startCountAnimation();
                             if (pro.isEmpty() || pro.equals("") || pro.equals(null) || pro.equals("null")) {
                                 promo.setText("Sin promociones");
                             } else {

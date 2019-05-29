@@ -82,7 +82,9 @@ public class MainActivity extends AppCompatActivity {
     private void botones() {
         TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         imei = telephonyManager.getDeviceId();
-        registrarLic.setOnClickListener(v -> checkCode());
+        registrarLic.setOnClickListener(v -> {
+            checkCode();
+        });
 
         buscarLic.setOnClickListener(v -> {
             Intent i = new Intent(MainActivity.this, tipoBusqueda.class);
