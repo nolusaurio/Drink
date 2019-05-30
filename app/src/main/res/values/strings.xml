@@ -27,8 +27,9 @@
     <string name="registrarUbicacionGPS">GPS</string>
     <string name="habilitarPermisos">Habilite los permisos</string>
     <string name="dialogoPermisosTitulo">Permisos desactivados</string>
-    <string name="dialogoPermisosMensajes">Debe aceptar los permisos para el correcto funcionamiento de la aplicación</string>
+    <string name="dialogoPermisosMensajes">Debe aceptar/activar los permisos para el correcto registro, configuración y funcionamiento de la aplicación</string>
     <string name="dialogoPermisosGracias">Gracias!</string>
+    <string name="habilitarRegistro">Intente habilitar los permisos nuevamente.</string>
     <string name="codigoDesactivo">El código caducó, renueve su suscripción</string>
     <string name="registroLicoreriaExitoso">Registro exitoso!</string>
     <string name="registroLicoreriaFallido">Error de registro, vuelva a intentar</string>

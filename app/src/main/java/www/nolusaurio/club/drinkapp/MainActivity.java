@@ -60,21 +60,35 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
-        if (Permisos()) {
-            botones();
-        } else {
-            LayoutInflater inflater = getLayoutInflater();
-            View layout = inflater.inflate(R.layout.custom_toast_permisos,
-                    (ViewGroup) findViewById(R.id.custom_toast_permisos));
+        buscarLic.setOnClickListener(v -> {
+            Intent i = new Intent(MainActivity.this, tipoBusqueda.class);
+            startActivity(i);
+            Animatoo.animateSwipeLeft(MainActivity.this);
 
-            TextView men = (TextView) layout.findViewById(R.id.mensaje);
-            men.setText(R.string.habilitarPermisos);
-            Toast toast = new Toast(getApplicationContext());
-            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-            toast.setDuration(Toast.LENGTH_SHORT);
-            toast.setView(layout);
-            toast.show();
-        }
+        });
+
+
+        registrarLic.setOnClickListener(v -> {
+
+            if(Permisos()){
+                botones();
+            } else {
+                LayoutInflater inflater = getLayoutInflater();
+                View layout = inflater.inflate(R.layout.custom_toast_permisos,
+                        (ViewGroup) findViewById(R.id.custom_toast_permisos));
+
+                TextView men = (TextView) layout.findViewById(R.id.mensaje);
+                men.setText(R.string.habilitarPermisos);
+                Toast toast = new Toast(getApplicationContext());
+                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                toast.setDuration(Toast.LENGTH_SHORT);
+                toast.setView(layout);
+                toast.show();
+            }
+        });
+
+
+
     }
 
 
@@ -82,16 +96,9 @@ public class MainActivity extends AppCompatActivity {
     private void botones() {
         TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         imei = telephonyManager.getDeviceId();
-        registrarLic.setOnClickListener(v -> {
-            checkCode();
-        });
 
-        buscarLic.setOnClickListener(v -> {
-            Intent i = new Intent(MainActivity.this, tipoBusqueda.class);
-            startActivity(i);
-            Animatoo.animateSwipeLeft(MainActivity.this);
+        checkCode();
 
-        });
     }
 
     private void checkCode() {
@@ -546,19 +553,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void solicitarPermisosManual() {
-        final CharSequence[] opciones = {"si", "no"};
+        final CharSequence[] opciones = {"Si", "No"};
         final AlertDialog.Builder alertaOpciones = new AlertDialog.Builder(MainActivity.this);
-        alertaOpciones.setTitle("Seleccione una opción");
+        alertaOpciones.setTitle("¿Activar permisos manualmente?");
         alertaOpciones.setItems(opciones, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (opciones[which].equals("si")) {
+                if (opciones[which].equals("Si")) {
                     Intent intent = new Intent();
                     intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                     Uri uri = Uri.fromParts("package", getPackageName(), null);
                     intent.setData(uri);
                     startActivity(intent);
                 } else {
+                    LayoutInflater inflater = getLayoutInflater();
+                    View layout = inflater.inflate(R.layout.custom_toast_error,
+                            (ViewGroup) findViewById(R.id.custom_toast_error));
+
+                    TextView men = (TextView) layout.findViewById(R.id.mensaje);
+                    men.setText(R.string.habilitarRegistro);
+                    Toast toast = new Toast(getApplicationContext());
+                    toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                    toast.setDuration(Toast.LENGTH_SHORT);
+                    toast.setView(layout);
+                    toast.show();
                     dialog.dismiss();
                 }
             }

@@ -92,7 +92,7 @@ public class tipoBusqueda extends AppCompatActivity {
             String direccion = URL + "/buscarLugarLico.php?palabra=" + zona;
             final String BACKURL = direccion;
 
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, direccion, response -> {
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, direccion, (String response) -> {
                 try {
                     clear();
 

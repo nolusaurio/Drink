@@ -12,6 +12,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -42,6 +43,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Calendar;
 
 public class VIstaLic extends AppCompatActivity {
 
@@ -81,8 +83,10 @@ public class VIstaLic extends AppCompatActivity {
         client = LocationServices.getFusedLocationProviderClient(this);
 
 
+
         if (bundle != null) {
             nombreLicoreria = bundle.getString("nombre").trim();
+            aumentarConteo();
             cargarComentarios(nombreLicoreria); //cargar comentarios en pantalla principal
             String d = bundle.getString("descripcion");
             String u = bundle.getString("ubicacion");
@@ -208,6 +212,87 @@ public class VIstaLic extends AppCompatActivity {
         }
 
     }
+
+    private void aumentarConteo() {
+        String URL = getString(R.string.URL);
+        int bandera = 1;
+        String envio = URL+"/conSuma.php?nomb="+nombreLicoreria;
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, envio, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    String resultJSON = response.getString("estado");
+                    if(resultJSON.equals("1")){
+                        JSONObject object = response.getJSONObject("mensaje");
+                        String day = object.getString("diario");
+                        String week = object.getString("semanal");
+                        int d = Integer.parseInt(day);
+                        int w = Integer.parseInt(week);
+
+                        long ahora = System.currentTimeMillis();
+                        Calendar calendario = Calendar.getInstance();
+                        calendario.setTimeInMillis(ahora);
+                        int hora = calendario.get(Calendar.HOUR_OF_DAY);
+                        int minuto = calendario.get(Calendar.MINUTE);
+
+                        Log.w("AHORA",hora+":"+minuto);
+
+                        if(hora==23 && minuto ==55 && bandera == 1){
+                            d = 0;
+                        } else {
+
+                        }
+
+                        d = d + 1;
+
+                        w = w + 1;
+
+                        actualizarSumas(d,w);
+
+                    }
+                    //JSONObject mensaje = response.getJSONObject("mensaje");
+                    //Log.w("VISTALIC", estado+","+mensaje);
+                } catch (JSONException e) {
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.w("VISTA ERROR", error.getMessage().toString());
+            }
+        });
+        SingletonVolley.getInstanciaVolley(getApplicationContext()).addToRequestQueue(getRequest);
+
+
+
+    }
+
+
+    private void actualizarSumas(int day, int week){
+        String URL = getString(R.string.URL);
+        String act = URL+"/upSum.php?days="+day+"&weeks="+week+"&nombre="+nombreLicoreria;
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, act, null,
+                response -> {
+                    try {
+                        String resulJSON = response.getString("estado");
+                        if (resulJSON.equals("1")) {
+                            Log.w("VISTA actualizar:", day+","+week);
+
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+
+                    }
+                },
+                error -> {
+                }
+        );
+        SingletonVolley.getInstanciaVolley(getApplicationContext()).addToRequestQueue(getRequest);
+
+    }
+
 
 
     private void aniadirComentario(String nom, String com){
