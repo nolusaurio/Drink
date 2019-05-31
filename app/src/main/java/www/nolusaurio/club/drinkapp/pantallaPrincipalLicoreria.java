@@ -72,7 +72,7 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
     private String URL = "";
     String nombreLicoreriaComentarios = "";
 
-    private TextView nombreLicoreria, descripcionLicoreria, ubii, ubiiGPS, estSw, telephone, cDiario, cSemanal;
+    private TextView nombreLicoreria, descripcionLicoreria, ubii, ubiiGPS, estSw, telephone, cDiario;
     private EditText promo;
     private ImageView fotografia;
     private Switch est;
@@ -111,7 +111,6 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
         actPromo = (Button) findViewById(R.id.guardarPromo);
         estSw = (TextView) findViewById(R.id.estadoswitch);
         cDiario = (TextView) findViewById(R.id.conteoDiario);
-        cSemanal = (TextView) findViewById(R.id.conteoSemanal);
         actFoto = (Button) findViewById(R.id.actualizarFoto);
         guardarFoto = (Button) findViewById(R.id.registrarFoto);
         actNombre = (Button) findViewById(R.id.actualizarNombre);
@@ -192,27 +191,19 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
     }
 
 
-    private void startCountAnimation(String diario, String semanal) {
+    private void startCountAnimation(String diario) {
         int d = Integer.parseInt(diario);
-        int s = Integer.parseInt(semanal);
         ValueAnimator animator = ValueAnimator.ofInt(0, d); //0 is min number, 600 is max number
-        ValueAnimator animator2 = ValueAnimator.ofInt(0, s); //0 is min number, 600 is max number
 
-        animator.setDuration(5000); //Duration is in milliseconds
-        animator2.setDuration(5000);
+        animator.setDuration(2000); //Duration is in milliseconds
 
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator animation) {
                 cDiario.setText(animation.getAnimatedValue().toString());
             }
         });
-        animator2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            public void onAnimationUpdate(ValueAnimator animation) {
-                cSemanal.setText(animation.getAnimatedValue().toString());
-            }
-        });
+
         animator.start();
-        animator2.start();
     }
 
     //********************************************************
@@ -949,14 +940,13 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                             String ubiGPS = resulJSON.getString("ub1c4c10nGPS");
                             String pro = resulJSON.getString("pr0m0c10n");
                             String diario = resulJSON.getString("diario");
-                            String semanal = resulJSON.getString("semanal");
                             String URL_IMAGEN2 = URL_IMAGEN + ruta;
                             cargarWebServiceImagen(URL_IMAGEN2);
                             nombreLicoreria.setText(nom);
                             descripcionLicoreria.setText(des);
                             ubii.setText(ubi);
                             ubiiGPS.setText(ubiGPS);
-                            startCountAnimation(diario, semanal);
+                            startCountAnimation(diario);
                             if (pro.isEmpty() || pro.equals("") || pro.equals(null) || pro.equals("null")) {
                                 promo.setText("Sin promociones");
                             } else {

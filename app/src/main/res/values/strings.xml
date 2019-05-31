@@ -139,6 +139,6 @@
     <string name="layoutRespuestaHint">Respuesta</string>
     <string name="mensajeSinComentarios">No tiene consultas pendientes</string>
     <string name="promocionLicoreria">Ingrese la promocion del día</string>
-    <string name="visitasLicoreria"><u>Visitas recibidas:</u></string>
+    <string name="visitasLicoreria"><u>Visitas diarias recibidas:</u></string>
 
 </resources>

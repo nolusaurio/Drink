@@ -43,7 +43,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.util.Calendar;
 
 public class VIstaLic extends AppCompatActivity {
 
@@ -225,43 +224,16 @@ public class VIstaLic extends AppCompatActivity {
                     if(resultJSON.equals("1")){
                         JSONObject object = response.getJSONObject("mensaje");
                         String day = object.getString("diario");
-                        String week = object.getString("semanal");
                         int d = Integer.parseInt(day);
-                        int w = Integer.parseInt(week);
-
-                        long ahora = System.currentTimeMillis();
-                        Calendar calendario = Calendar.getInstance();
-                        calendario.setTimeInMillis(ahora);
-                        int hora = calendario.get(Calendar.HOUR_OF_DAY);
-                        int minuto = calendario.get(Calendar.MINUTE);
-
-                        Log.w("AHORA",hora+":"+minuto);
-
-                        if(hora==23 && minuto ==55 && bandera == 1){
-                            d = 0;
-                        } else {
-
-                        }
-
                         d = d + 1;
-
-                        w = w + 1;
-
-                        actualizarSumas(d,w);
+                        actualizarSumas(d);
 
                     }
-                    //JSONObject mensaje = response.getJSONObject("mensaje");
-                    //Log.w("VISTALIC", estado+","+mensaje);
                 } catch (JSONException e) {
 
                 }
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.w("VISTA ERROR", error.getMessage().toString());
-            }
-        });
+        }, error -> Log.w("VISTA ERROR", error.getMessage().toString()));
         SingletonVolley.getInstanciaVolley(getApplicationContext()).addToRequestQueue(getRequest);
 
 
@@ -269,15 +241,15 @@ public class VIstaLic extends AppCompatActivity {
     }
 
 
-    private void actualizarSumas(int day, int week){
+    private void actualizarSumas(int day){
         String URL = getString(R.string.URL);
-        String act = URL+"/upSum.php?days="+day+"&weeks="+week+"&nombre="+nombreLicoreria;
+        String act = URL+"/upSum.php?days="+day+"&nombre="+nombreLicoreria;
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, act, null,
                 response -> {
                     try {
                         String resulJSON = response.getString("estado");
                         if (resulJSON.equals("1")) {
-                            Log.w("VISTA actualizar:", day+","+week);
+                            Log.w("VISTA actualizar:", day+"");
 
                         }
 

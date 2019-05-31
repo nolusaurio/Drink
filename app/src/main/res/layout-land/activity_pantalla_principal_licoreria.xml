@@ -537,54 +537,23 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/visitasLicoreria"
-                            android:textSize="25sp" />
+                            android:textSize="20sp" />
 
-                        <LinearLayout
-                            android:layout_marginTop="3dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="5dp"
-                            android:orientation="horizontal">
+
 
                             <TextView
-                                android:layout_width="0dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:text="Diarias:"
-                                android:textAlignment="center"
-                                android:textSize="18sp" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:background="@color/colorPrimaryDark"
                                 android:id="@+id/conteoDiario"
                                 android:textAlignment="center"
                                 android:textColor="@color/texto"
-                                android:textSize="18sp"
+                                android:layout_marginEnd="5dp"
+                                android:textSize="20sp"
                                 android:textStyle="bold" />
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:text="Semanal:"
-                                android:textAlignment="center"
-                                android:textSize="18sp" />
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textAlignment="center"
-                                android:background="@color/colorPrimaryDark"
-                                android:id="@+id/conteoSemanal"
-                                android:textColor="@color/texto"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
 
-                        </LinearLayout>
 
 
                     </LinearLayout>
