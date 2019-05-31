@@ -23,6 +23,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -806,7 +807,7 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
         final String BACKURL = URL_GET;
         URL_GET = URL_GET + cod;
 
-
+        Log.w("URL", URL_GET);
         final JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, URL_GET, null,
                 response -> {
                     try {
@@ -819,6 +820,7 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                             if (estate.equals("1")) {
                                 est.setChecked(true);
                                 obtenerDatos();
+
                             } else {
                                 est.setChecked(false);
                                 obtenerDatos();
@@ -943,6 +945,7 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                             String URL_IMAGEN2 = URL_IMAGEN + ruta;
                             cargarWebServiceImagen(URL_IMAGEN2);
                             nombreLicoreria.setText(nom);
+                            aumentarConteo(nom);
                             descripcionLicoreria.setText(des);
                             ubii.setText(ubi);
                             ubiiGPS.setText(ubiGPS);
@@ -1281,4 +1284,57 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menulico, menu);
         return true;
     }
+
+    //sumas de ingresos por parte del dueño
+    private void aumentarConteo(String nombre) {
+        String URL = getString(R.string.URL);
+        //String envio = URL+"/conIng.php?nomb="+nombreLicoreria.getText().toString().trim();
+        String envio = URL+"/conIng.php?nomb="+nombre;
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, envio, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    String resultJSON = response.getString("estado");
+                    if(resultJSON.equals("1")){
+                        JSONObject object = response.getJSONObject("mensaje");
+                        String day = object.getString("ingresos");
+                        int i = Integer.parseInt(day);
+                        i = i + 1;
+                        actualizarSumas(i,nombre);
+
+                    }
+                } catch (JSONException e) {
+                }
+            }
+        }, error -> {
+        });
+        SingletonVolley.getInstanciaVolley(getApplicationContext()).addToRequestQueue(getRequest);
+
+    }
+
+
+    private void actualizarSumas(int day, String nombre){
+
+        String URL = getString(R.string.URL);
+        String act = URL+"/upIng.php?enter="+day+"&nombre="+nombre;
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, act, null,
+                response -> {
+                    try {
+                        String resulJSON = response.getString("estado");
+                        if (resulJSON.equals("1")) {
+
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+
+                    }
+                },
+                error -> {
+                }
+        );
+        SingletonVolley.getInstanciaVolley(getApplicationContext()).addToRequestQueue(getRequest);
+
+    }
+
 }

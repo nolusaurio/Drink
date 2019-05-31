@@ -214,7 +214,6 @@ public class VIstaLic extends AppCompatActivity {
 
     private void aumentarConteo() {
         String URL = getString(R.string.URL);
-        int bandera = 1;
         String envio = URL+"/conSuma.php?nomb="+nombreLicoreria;
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, envio, null, new Response.Listener<JSONObject>() {
             @Override
@@ -233,10 +232,9 @@ public class VIstaLic extends AppCompatActivity {
 
                 }
             }
-        }, error -> Log.w("VISTA ERROR", error.getMessage().toString()));
+        }, error -> {
+        });
         SingletonVolley.getInstanciaVolley(getApplicationContext()).addToRequestQueue(getRequest);
-
-
 
     }
 
