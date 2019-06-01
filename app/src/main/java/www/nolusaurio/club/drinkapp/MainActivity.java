@@ -123,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
         String URLVerificarCampos = URL + "/comCampos.php?codigo=";
         String BACKURL = URLVerificarCampos;
         URLVerificarCampos = URLVerificarCampos + cod + "&imei=" + imei + "&estado=" + bandera;
-
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.custom_toast_success,
                 (ViewGroup) findViewById(R.id.custom_toast_success));

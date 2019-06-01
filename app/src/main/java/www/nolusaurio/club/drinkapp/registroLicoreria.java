@@ -238,9 +238,11 @@ public class registroLicoreria extends AppCompatActivity {
                             jsonObject.put("ubicacionLic", ubicacion.getText().toString().trim());
                             jsonObject.put("ubicacionGPSLic", gpss.getText().toString().trim());
                             jsonObject.put("codigoregistro", getCodigo());
+                            jsonObject.put("diario", "0");
+                            jsonObject.put("ingresos", "1");
                             jsonObject.put("imagen", img + "\\}");
-                            final String requestBody = jsonObject.toString();
 
+                            final String requestBody = jsonObject.toString();
 
                             StringRequest stringRequest = new StringRequest(Request.Method.POST, url, responsse -> {
                                 if (responsse.equals("200")) {
