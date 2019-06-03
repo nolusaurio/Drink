@@ -149,7 +149,7 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
         });
 
         actPromo.setOnClickListener(v -> {
-            if (promo.length() > 250) {
+            if (promo.length() > 300) {
                 LayoutInflater inflater = getLayoutInflater();
                 View layout = inflater.inflate(R.layout.custom_toast_general,
                         (ViewGroup) findViewById(R.id.custom_toast_gen));
@@ -196,7 +196,7 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
         int d = Integer.parseInt(diario);
         ValueAnimator animator = ValueAnimator.ofInt(0, d); //0 is min number, 600 is max number
 
-        animator.setDuration(2000); //Duration is in milliseconds
+        animator.setDuration(1500); //Duration is in milliseconds
 
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator animation) {
@@ -951,7 +951,7 @@ public class pantallaPrincipalLicoreria extends AppCompatActivity {
                             ubiiGPS.setText(ubiGPS);
                             startCountAnimation(diario);
                             if (pro.isEmpty() || pro.equals("") || pro.equals(null) || pro.equals("null")) {
-                                promo.setText("Sin promociones");
+
                             } else {
                                 promo.setText(pro);
                             }

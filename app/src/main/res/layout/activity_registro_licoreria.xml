@@ -199,7 +199,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
-                        android:digits="@string/digitos"
+                        android:digits="@string/digitos2"
                         android:maxLines="1"
                         app:backgroundTint="@color/textoSegundo" />
 

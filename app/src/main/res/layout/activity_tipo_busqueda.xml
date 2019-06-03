@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/buscar"
             android:singleLine="true"
-            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
+            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz1234567890"
             android:id="@+id/palabraabuscar"
             app:backgroundTint="@color/textoSegundo"
             />

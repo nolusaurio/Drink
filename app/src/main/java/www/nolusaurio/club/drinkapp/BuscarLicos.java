@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -56,8 +57,6 @@ public class BuscarLicos extends AppCompatActivity {
         upd = (Button) findViewById(R.id.update);
 
 
-        cargarLicos();
-
         upd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,8 +66,15 @@ public class BuscarLicos extends AppCompatActivity {
 
     }
 
-    private void cargarLicos() {
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        cargarLicos();
+    }
+
+    private void cargarLicos() {
+        Log.e("BUSCAR LICOS=>", "cargar licos");
         loadingScreen.show(getSupportFragmentManager(), "Espere...");
 
         String URL = getString(R.string.URL);
