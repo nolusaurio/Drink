@@ -106,7 +106,7 @@
 
     <string name="problemas_camara">Se recomienda capturar la fotografia de forma vertical para una mejor visualización de ubicación.</string>
     <string name="problemas_internet">Revise si posee señal de internet a través de datos o verifique su conexión Wifi para evitar inconvenientes de conexión.</string>
-    <string name="problemas_soporte">¿Dudas?¿Sugerencias?¿Comentarios? sientase libre de contactarnos al correo soporte@apideas.club, por nuestra red social en Facebook o al numero celular/whatsapp:  </string>
+    <string name="problemas_soporte">¿Dudas?¿Sugerencias?¿Comentarios? sientase libre de contactarnos al correo soporte@apideas.club, por nuestra red social en Facebook o al numero celular/whatsapp: 78830841 </string>
     <string name="problemas_gps">Si tiene problemas para establecer la ubicación del GPS, verifique si es posible obtener su posición ingresando a Google Maps, en caso de ser exitosa la ubicación mediante tal aplicación, intentar nuevamente obtener la ubicación por el botón GPS de la aplicación Oh!Bebemos. </string>
 
     <string name="orientacionFoto">Orientación de cámara</string>
@@ -123,7 +123,7 @@
 
     <string name="comentariosLico"><u>Consultas y respuestas de la licorería</u></string>
 
-
+    <string name="hintDescripcionLico">Ejemplo: Venta de licores, snacks, piqueos...</string>
 
 
 

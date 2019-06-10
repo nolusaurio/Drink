@@ -249,6 +249,7 @@
                         android:maxLines="1"
                         android:digits="@string/digitos2"
                         android:layout_marginRight="10dp"
+                        android:hint="@string/hintDescripcionLico"
                         app:backgroundTint="@color/textoSegundo" />
 
                 </LinearLayout>

@@ -12,7 +12,6 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -247,7 +246,6 @@ public class VIstaLic extends AppCompatActivity {
                     try {
                         String resulJSON = response.getString("estado");
                         if (resulJSON.equals("1")) {
-                            Log.w("VISTA actualizar:", day+"");
 
                         }
 
@@ -517,6 +515,11 @@ public class VIstaLic extends AppCompatActivity {
                         String nombreConsultante = resulJSON.getString("n0mbr3c0ns4ltant3");
                         String consultaConsultante = resulJSON.getString("c0ns4lt4c0ns4lt4");
                         String respuestaConsulta = resulJSON.getString("r3sp43st4");
+
+                        if(respuestaConsulta.isEmpty() || respuestaConsulta.equals("") ||
+                                respuestaConsulta.equals(null) || respuestaConsulta.equals("null")){
+                            respuestaConsulta = "En espera de respuesta...";
+                        }
 
                         String coment = comentario.getText().toString();
                         String nombr = getString(R.string.nombreCon);

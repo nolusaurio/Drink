@@ -67,9 +67,9 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginLeft="50dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="50dp"
+                android:layout_marginRight="20dp"
                 android:background="@color/textoSegundo" />
 
             <!-- division dos columnas principales-->
@@ -184,9 +184,9 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginLeft="50dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="50dp"
+                android:layout_marginRight="20dp"
                 android:background="@color/textoSegundo" />
 
 
@@ -300,9 +300,9 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginLeft="50dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="50dp"
+                android:layout_marginRight="20dp"
                 android:background="@color/textoSegundo" />
 
 
@@ -450,9 +450,9 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginLeft="50dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginRight="50dp"
+                    android:layout_marginRight="20dp"
                     android:background="@color/textoSegundo" />
 
                 <TextView
